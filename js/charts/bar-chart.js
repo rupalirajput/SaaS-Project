@@ -8,7 +8,7 @@
 	var barchart1 = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			labels: ["Red", "Blue", "Yellow", "Green"],
+			labels: ["Slopes", "Equations of Lines", "Horizontal and Vertical Lines", "Tangent Lines"],
 			datasets: [{
 				label: 'Bar Chart',
 				data: [12, 19, 3, 5, 2, 3],
@@ -127,7 +127,7 @@
 			}
 		}
 	});
-	
+
 	/*----------------------------------------*/
 	/*  4.  Bar Chart Multi axis
 	/*----------------------------------------*/
@@ -178,7 +178,7 @@
 					'rgba(153, 102, 255, 1)',
 					'rgba(255, 159, 64, 1)'
 				],
-				
+
             }]
 		},
 		options: {
@@ -209,7 +209,7 @@
 			}
 		}
 	});
-	
-	
-		
-})(jQuery); 
+
+
+
+})(jQuery);
