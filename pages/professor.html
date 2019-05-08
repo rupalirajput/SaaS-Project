@@ -114,9 +114,15 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Take a Test</h2>
+										<h2>My Dashboard</h2>
 										<p>Welcome to ADAPTEST<span class="bread-ntd"></span></p>
 									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+								<div class="breadcomb-report">
+                    <button type="button" class="btn btn-success" onclick="location.href = 'createQuestionBank.html';" > Create Question Bank </button>
+
 								</div>
 							</div>
 						</div>
@@ -126,101 +132,57 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-  <!-- Test Window Begin -->
-  <div class="breadcomb-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="breadcomb-list" style="border:1px solid #cecece">
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
             <div class="row">
-              <div class="col-xs-12">
-                <div class="breadcomb-wp">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-xs-4 text-center">
-                        <p style="font-size:large; color:black">Test:Precalculus Ch.3-4</p>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <a class="btn btn-info">End Test</a>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <p style="font-size:large; color:black">Time Remaining: 56 min</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <div class="form-element-list mg-t-30">
-                            <div class="basic-tb-hd">
-                                <h2>Question 1</h2>
-                                <p>Which the functions f(x), g(x) and h(x) is a one-to-one function?</p>
-                            </div>
-                            <div class="row">
-                              <form>
-                                <fieldset>
-                                  <div class="row">
-                                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <input type = "radio"
-                                               name = "radSize"
-                                               id = "sizeMed"
-                                               value = "g(x) is a one-to-one function" />
-                                        <label style="color: black; font-weight: 400" for = "sizeMed">g(x) is a one-to-one function</label>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <input type = "radio"
-                                             name = "radSize"
-                                             id = "sizeMed"
-                                             value = "f(x) is a one-to-one function" />
-                                      <label style="color: black; font-weight: 400" for = "sizeMed">f(x) is a one-to-one function</label>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <input type = "radio"
-                                             name = "radSize"
-                                             id = "sizeMed"
-                                             value = "f(x) and g(x) are one-to-one functions" />
-                                      <label style="color: black; font-weight: 400" for = "sizeMed">f(x) and g(x) are one-to-one functions</label>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <input type = "radio"
-                                             name = "radSize"
-                                             id = "sizeMed"
-                                             value = "h(x) is a one-to-one function" />
-                                      <label style="color: black; font-weight: 400" for = "sizeMed">h(x) is a one-to-one function</label>
-                                    </div>
-                                  </div>
-                                </fieldset>
-                              </form>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 2%;">
-                        <div class="search-input">
-                            <i class="notika-icon notika-left-arrow"></i>
-                            <input type="text" value="">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
                         </div>
-                      </div>
+                        <div class="table-responsive">
+                          <div class="widget widget-table action-table">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Question Bank Name</th>
+                                        <th>Description</th>
+                                        <th>Start Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                      <td> Precalculus I </td>
+                                      <td> Chapter 1 to 5 </td>
+                                      <td> 01/01/2019 </td>
+                                      <td> Published </td>
+                                      <td> <button type="button" class="btn btn-success"> View </button></td>
+                                  </tr>
+                                  <tr>
+                                    <td> Precalculus II </td>
+                                    <td> Chapter 6 to 10 </td>
+                                    <td> 01/01/2019 </td>
+                                    <td> Draft</td>
+                                    <td> <button type="button" class="btn btn-primary"> Edit </button>  <button type="button" class="btn btn-danger"> Delete </button>  <button type="button" class="btn btn-light"> Publish </button>   </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Precalculus III </td>
+                                    <td> Chapter 11 to 15 </td>
+                                    <td> 01/01/2019 </td>
+                                    <td> Draft</td>
+                                    <td> <button type="button" class="btn btn-primary"> Edit </button>  <button type="button" class="btn btn-danger"> Delete </button>  <button type="button" class="btn btn-light">Publish </button>  </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="row">
-                      <a href="#" class="btn btn-info col-xs-1">Back</a>
-                      <div class="col-xs-4">
-                      </div>
-                      <a href="#" class="btn btn-info col-xs-1">Next</a>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-    <!-- Test Window End-->
+    <!-- Data Table area End-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">

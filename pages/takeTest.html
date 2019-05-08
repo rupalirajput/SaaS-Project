@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Take a Test</title>
+    <title>My Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/responsive.css">
@@ -141,7 +141,7 @@
                         <p style="font-size:large; color:black">Test:Precalculus Ch.3-4</p>
                       </div>
                       <div class="col-xs-4 text-center">
-                        <a class="btn btn-info">End Test</a>
+                        <button type="button" class="btn btn-info" onclick="location.href = 'student.html';" >End Test</button>
                       </div>
                       <div class="col-xs-4 text-center">
                         <p style="font-size:large; color:black">Time Remaining: 56 min</p>
@@ -155,40 +155,46 @@
                                 <p>Which the functions f(x), g(x) and h(x) is a one-to-one function?</p>
                             </div>
                             <div class="row">
-                              <div class="row">
-                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <div class="fm-checkbox">
-                                          <label style="color: black"><div class="iradio_square-green" style="position: relative;"><input class="i-checks" style="position: absolute; opacity: 0;" type="radio" checked=""><ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins></div> <i></i>
-                                            g(x) is a one-to-one function
-                                          </label>
+                              <form>
+                                <fieldset>
+                                  <div class="row">
+                                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <input type = "radio"
+                                               name = "radSize"
+                                               id = "sizeMed"
+                                               value = "g(x) is a one-to-one function" />
+                                        <label style="color: black; font-weight: 400" for = "sizeMed">g(x) is a one-to-one function</label>
                                       </div>
                                   </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <div class="fm-checkbox">
-                                          <label style="color: black"><div class="iradio_square-green" style="position: relative;"><input class="i-checks" style="position: absolute; opacity: 0;" type="checkbox"><ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins></div> <i></i> f(x) is a one-to-one function</label>
-                                      </div>
+                                  <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <input type = "radio"
+                                             name = "radSize"
+                                             id = "sizeMed"
+                                             value = "f(x) is a one-to-one function" />
+                                      <label style="color: black; font-weight: 400" for = "sizeMed">f(x) is a one-to-one function</label>
+                                    </div>
                                   </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <div class="fm-checkbox form-elet-mg">
-                                          <label style="color: black" class="hover"><div class="iradio_square-green checked" style="position: relative;"><input disabled="" class="i-checks" style="position: absolute; opacity: 0;" type="radio"><ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins></div> <i></i>
-                                            f(x) and g(x) are one-to-one functions
-                                          </label>
-                                      </div>
+                                  <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <input type = "radio"
+                                             name = "radSize"
+                                             id = "sizeMed"
+                                             value = "f(x) and g(x) are one-to-one functions" />
+                                      <label style="color: black; font-weight: 400" for = "sizeMed">f(x) and g(x) are one-to-one functions</label>
+                                    </div>
                                   </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <div class="fm-checkbox">
-                                          <label style="color: black"><div class="iradio_square-green" style="position: relative;"><input class="i-checks" style="position: absolute; opacity: 0;" type="radio" checked=""><ins class="iCheck-helper" style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; border-image: none; left: 0%; top: 0%; width: 100%; height: 100%; display: block; position: absolute; opacity: 0;"></ins></div> <i></i>
-                                            h(x) is a one-to-one function
-                                          </label>
-                                      </div>
+                                  <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <input type = "radio"
+                                             name = "radSize"
+                                             id = "sizeMed"
+                                             value = "h(x) is a one-to-one function" />
+                                      <label style="color: black; font-weight: 400" for = "sizeMed">h(x) is a one-to-one function</label>
+                                    </div>
                                   </div>
-                              </div>
+                                </fieldset>
+                              </form>
                             </div>
                           </div>
                       </div>
