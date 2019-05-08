@@ -4626,6 +4626,28 @@ body.box-layout {
 	position: relative;
     top: 2px;
 }
+.enter-username-pw{
+    text-align: center;
+    color: black;
+    padding: 150px;
+}
+.registerYourOrg {
+    text-align: right;
+}
+.testing{
+    text-align: center;
+}
+.changepw {
+    text-align: center;
+}
+
+.login {
+    text-align: center;
+}
+
+.row-centered{
+    text-align: center;
+}
 /*----------------------------------------*/
 /*  59. Notika custom scrollbar CSS
 /*----------------------------------------*/
