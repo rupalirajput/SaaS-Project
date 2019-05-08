@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{6FF1268F-1DC4-402A-A7C0-D3153CFC2122}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SaaSProject</RootNamespace>
+    <AssemblyName>SaaS-Project</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="createDB\createAdminUser.js" />
+    <None Include="createDB\createQuizAppSampleData.js" />
+    <None Include="img\image1.png" />
+    <None Include="interfaces\IAccountModel.ts" />
+    <None Include="model\AccountModel.ts" />
+    <None Include="pages\index.html" />
+    <None Include="pages\script.js" />
+    <None Include="start.toDoSample.cmd" />
+    <None Include="startdbClient.toDoSample.cmd" />
+    <None Include="startdbClient.toDoSample2.cmd" />
+    <None Include="App.js" />
+    <None Include="AppServer.js" />
+    <None Include="DataAccess.js" />
+    <None Include="package-lock.json" />
+    <None Include="package.json" />
+    <None Include="tsconfig.json" />
+    <None Include="README.md" />
+    <None Include="App.ts" />
+    <None Include="AppServer.ts" />
+    <None Include="DataAccess.ts" />
+    <None Include="css\.DS_Store" />
+    <None Include="css\animate.css" />
+    <None Include="css\bootstrap.min.css" />
+    <None Include="css\font-awesome.min.css" />
+    <None Include="css\jquery.dataTables.min.css" />
+    <None Include="css\main.css" />
+    <None Include="css\normalize.css" />
+    <None Include="css\notika-custom-icon.css" />
+    <None Include="css\owl.carousel.css" />
+    <None Include="css\owl.theme.css" />
+    <None Include="css\owl.transitions.css" />
+    <None Include="css\responsive.css" />
+    <None Include="css\themesaller-forms.css" />
+    <None Include="css\animation\animation-custom.css" />
+    <None Include="css\bootstrap-select\bootstrap-select.css" />
+    <None Include="css\c3\c3.min.css" />
+    <None Include="css\chosen\chosen-sprite.png" />
+    <None Include="css\chosen\chosen.css" />
+    <None Include="css\code-editor\1.jpg" />
+    <None Include="css\code-editor\ambiance.css" />
+    <None Include="css\code-editor\codemirror.css" />
+    <None Include="css\color-picker\farbtastic.css" />
+    <None Include="css\color-picker\marker.png" />
+    <None Include="css\color-picker\mask.png" />
+    <None Include="css\color-picker\wheel.png" />
+    <None Include="css\cropper\cropper.min.css" />
+    <None Include="css\datapicker\datepicker3.css" />
+    <None Include="css\dialog\dialog.css" />
+    <None Include="css\dialog\sweetalert2.min.css" />
+    <None Include="css\dropzone\dropzone.css" />
+    <None Include="css\jvectormap\jquery-jvectormap-2.0.3.css" />
+    <None Include="css\meanmenu\meanmenu.min.css" />
+    <None Include="css\metisMenu\metisMenu-vertical.css" />
+    <None Include="css\metisMenu\metisMenu.min.css" />
+    <None Include="css\notification\notification.css" />
+    <None Include="css\scrollbar\jquery.mCustomScrollbar.min.css" />
+    <None Include="css\summernote\summernote.css" />
+    <None Include="css\wave\button.css" />
+    <None Include="css\wave\waves.min.css" />
+    <None Include="fonts\FontAwesome.otf" />
+    <None Include="fonts\fontawesome-webfont.eot" />
+    <None Include="fonts\fontawesome-webfont.svg" />
+    <None Include="fonts\fontawesome-webfont.ttf" />
+    <None Include="fonts\fontawesome-webfont.woff" />
+    <None Include="fonts\fontawesome-webfont.woff2" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.svg" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="fonts\notika-icon.eot" />
+    <None Include="fonts\notika-icon.svg" />
+    <None Include="fonts\notika-icon.ttf" />
+    <None Include="fonts\notika-icon.woff" />
+    <None Include="js\autosize.min.js" />
+    <None Include="js\bootstrap.min.js" />
+    <None Include="js\jasny-bootstrap.min.js" />
+    <None Include="js\jquery-price-slider.js" />
+    <None Include="js\jquery.scrollUp.min.js" />
+    <None Include="js\main.js" />
+    <None Include="js\owl.carousel.min.js" />
+    <None Include="js\plugins.js" />
+    <None Include="js\tawk-chat.js" />
+    <None Include="js\wow.min.js" />
+    <None Include="js\animation\animation-active.js" />
+    <None Include="js\bootstrap-select\bootstrap-select.js" />
+    <None Include="js\charts\Chart.js" />
+    <None Include="js\charts\area-chart.js" />
+    <None Include="js\charts\bar-chart.js" />
+    <None Include="js\charts\line-chart.js" />
+    <None Include="js\chat\jquery.chat.js" />
+    <None Include="js\chat\moment.min.js" />
+    <None Include="js\chosen\chosen.jquery.js" />
+    <None Include="js\code-editor\code-editor-active.js" />
+    <None Include="js\code-editor\code-editor.js" />
+    <None Include="js\code-editor\codemirror.js" />
+    <None Include="js\color-picker\color-picker.js" />
+    <None Include="js\color-picker\farbtastic.min.js" />
+    <None Include="js\counterup\counterup-active.js" />
+    <None Include="js\counterup\jquery.counterup.min.js" />
+    <None Include="js\counterup\waypoints.min.js" />
+    <None Include="js\cropper\cropper-actice.js" />
+    <None Include="js\cropper\cropper.min.js" />
+    <None Include="js\data-map\d3.min.js" />
+    <None Include="js\data-map\data-maps-active.js" />
+    <None Include="js\data-map\datamaps.all.min.js" />
+    <None Include="js\data-map\topojson.js" />
+    <None Include="js\data-table\data-table-act.js" />
+    <None Include="js\data-table\jquery.dataTables.min.js" />
+    <None Include="js\datapicker\bootstrap-datepicker.js" />
+    <None Include="js\datapicker\datepicker-active.js" />
+    <None Include="js\dialog\dialog-active.js" />
+    <None Include="js\dialog\sweetalert2.min.js" />
+    <None Include="js\dropzone\dropzone.js" />
+    <None Include="js\easytopie\jquery.easypiechart.min.js" />
+    <None Include="js\easytopie\salvattore.min.js" />
+    <None Include="js\flot\analtic-flot-active.js" />
+    <None Include="js\flot\chart-tooltips.js" />
+    <None Include="js\flot\curvedLines.js" />
+    <None Include="js\flot\flot-active.js" />
+    <None Include="js\flot\flot-widget-anatic-active.js" />
+    <None Include="js\flot\jquery.flot.js" />
+    <None Include="js\flot\jquery.flot.orderBars.js" />
+    <None Include="js\flot\jquery.flot.pie.js" />
+    <None Include="js\flot\jquery.flot.resize.js" />
+    <None Include="js\flot\jquery.flot.time.js" />
+    <None Include="js\flot\jquery.flot.tooltip.min.js" />
+    <None Include="js\google.maps\google.maps-active.js" />
+    <None Include="js\google.maps\google.maps2-active.js" />
+    <None Include="js\icheck\icheck-active.js" />
+    <None Include="js\icheck\icheck.min.js" />
+    <None Include="js\jvectormap\jquery-jvectormap-2.0.2.min.js" />
+    <None Include="js\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <None Include="js\jvectormap\jvectormap-active.js" />
+    <None Include="js\knob\jquery.appear.js" />
+    <None Include="js\knob\jquery.knob.js" />
+    <None Include="js\knob\knob-active.js" />
+    <None Include="js\login\login-action.js" />
+    <None Include="js\meanmenu\jquery.meanmenu.js" />
+    <None Include="js\metisMenu\metisMenu-active.js" />
+    <None Include="js\metisMenu\metisMenu.min.js" />
+    <None Include="js\notification\bootstrap-growl.min.js" />
+    <None Include="js\notification\notification-active.js" />
+    <None Include="js\rangle-slider\jquery-ui-1.10.4.custom.min.js" />
+    <None Include="js\rangle-slider\jquery-ui-touch-punch.min.js" />
+    <None Include="js\rangle-slider\rangle-active.js" />
+    <None Include="js\scrollbar\jquery.mCustomScrollbar.concat.min.js" />
+    <None Include="js\sparkline\jquery.sparkline.min.js" />
+    <None Include="js\sparkline\sparkline-active.js" />
+    <None Include="js\summernote\summernote-active.js" />
+    <None Include="js\summernote\summernote-updated.min.js" />
+    <None Include="js\summernote\summernote.min.js" />
+    <None Include="js\todo\jquery.todo.js" />
+    <None Include="js\vendor\jquery-1.12.4.min.js" />
+    <None Include="js\vendor\modernizr-2.8.3.min.js" />
+    <None Include="js\wave\wave-active.js" />
+    <None Include="js\wave\waves.min.js" />
+    <None Include="js\wizard\jquery.bootstrap.wizard.min.js" />
+    <None Include="js\wizard\wizard-active.js" />
+    <None Include="img\chosen-sprite.png" />
+    <None Include="img\favicon.ico" />
+    <None Include="img\green1.png" />
+    <None Include="img\blog\1.jpg" />
+    <None Include="img\country\1.png" />
+    <None Include="img\country\2.png" />
+    <None Include="img\country\3.png" />
+    <None Include="img\cropper\1.jpg" />
+    <None Include="img\dialog\like.png" />
+    <None Include="img\logo\favicon.png" />
+    <None Include="img\logo\logo.png" />
+    <None Include="img\post\1.jpg" />
+    <None Include="img\post\2.jpg" />
+    <None Include="img\post\4.jpg" />
+    <None Include="img\search-engines\baidu.png" />
+    <None Include="img\search-engines\bing.png" />
+    <None Include="img\search-engines\duckduckgo.png" />
+    <None Include="img\search-engines\google.png" />
+    <None Include="img\search-engines\yahoo.png" />
+    <None Include="img\search-engines\yandex.png" />
+    <None Include="img\widgets\2.png" />
+    <None Include="img\widgets\4.png" />
+    <None Include="img\widgets\6.png" />
+    <None Include="pages\createQuestionBank.html" />
+    <None Include="pages\myDashboard.html" />
+    <None Include="images\select.png" />
+    <None Include="images\sort_asc.png" />
+    <None Include="images\sort_asc_disabled.png" />
+    <None Include="images\sort_both.png" />
+    <None Include="images\sort_desc.png" />
+    <None Include="images\sort_desc_disabled.png" />
+    <None Include="css\style.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
