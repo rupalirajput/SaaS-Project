@@ -123,6 +123,30 @@ class App {
         });
     });
 
+        // get API for getting all reports
+    router.get('/app/account/:userid/reports', (req, res) => {
+      var id = req.params.userid;
+      console.log("Query single user's reports with id:" + id);
+      this.Reports.retrieveAllReportDetails(res, {userid: id}, (err) => {
+        if (err){
+          console.log('failed to retrieve all reports');
+        }
+      });
+    });
+    
+      // get API for getting a single report
+    router.get('/app/account/:userid/reports/:reportid', (req, res) => {
+      var id = req.params.userid;
+      var reportid = req.params.reportid;
+      console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
+      this.Reports.retrieveSingleReportDetails(res, {userid: id}, 
+        {reportid: reportid}, (err) => {
+          if (err) {
+            console.log('failed to retrieve single report');
+          }
+        });
+    });
+
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
