@@ -8,7 +8,8 @@ import * as bodyParser from 'body-parser';
 //var Q = require('q');
 
 import {AccountModel} from './model/AccountModel';
-//import {TaskModel} from './model/TaskModel';
+import {QuestionBankModel} from './model/QuestionBankModel';
+import {QuestionsModel} from './model/QuestionsModel';
 import {DataAccess} from './DataAccess';
 import {ReportModel} from './model/ReportModel';
 
@@ -22,19 +23,20 @@ class App {
   //public Tasks:TaskModel;
   public idGenerator:number;
   public questionIdGenerator:number;
-
-    
+  public QuestionBanks:QuestionBankModel;
+  public Questions:QuestionsModel;
 
   //Run configuration methods on the Express instance.
   constructor() {
     this.expressApp = express();
     this.middleware();
     this.routes();
-    this.idGenerator = 100;
-    this.questionIdGenerator = 1;
+    this.idGenerator = 200;
     this.Accounts = new AccountModel();
     this.Reports = new ReportModel();
     //this.Tasks = new TaskModel();
+    this.QuestionBanks = new QuestionBankModel();
+    this.Questions = new QuestionsModel();
   }
 
   // Configure Express middleware.
@@ -47,10 +49,9 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
-
-      // get API for retriving all created accounts
+   
     router.get('/app/account/', (req, res) => {
-        console.log('Query All accounts');
+        console.log('Query All account');
         this.Accounts.retrieveAllAcccounts(res);
     });
 
@@ -89,6 +90,87 @@ class App {
         console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
         this.Reports.retrieveSingleReportDetails(res, {userid: id, reportid: reportid});
     
+  // retrive all questionBanks
+    router.get('/app/questionBanks/', (req, res) => {
+      console.log('Query All questionBanks');
+      this.QuestionBanks.retrieveAllQuestionBanks(res);
+    });
+  // retrive questionBank with ID
+    router.get('/app/questionBanks/:quesBankID/', (req, res) => {
+      var id = req.params.quesBankID;
+      console.log('Query single list with id: ' + id);
+      this.QuestionBanks.retrieveQuestionBankDetails(res, {quesBankID: id});
+    });
+
+  // post data in questionBank
+    router.post('/app/questionBanks/', (req, res) => {
+      console.log(req.body);
+      var jsonObj = req.body;
+      jsonObj.quesBankID = this.idGenerator;
+      this.QuestionBanks.model.create([jsonObj], (err) => {
+          if (err) {
+              console.log('object creation failed');
+          }
+      });
+      res.send(this.idGenerator.toString());
+      this.idGenerator++;
+  });
+
+  // delete question bank
+    router.delete('/app/questionBanks/:quesBankID/', (req, res) => {
+      var id = req.params.quesBankID;
+      console.log('Delete QuestionBank with id: ' + id);
+      this.QuestionBanks.deleteQuestionBank(res, {quesBankID: id});
+    });
+
+  // update question bank
+  router.put('/app/questionBanks/:quesBankID/', (req, res) => {
+    console.log(req.body);
+    var jsonObj = req.body;
+    var id = req.params.quesBankID;
+    jsonObj.quesBankID = id;
+    this.QuestionBanks.model.update([jsonObj],{questionid: id}, (err) => {
+        if (err) {
+            console.log('object creation failed');
+        }
+    });
+    res.send(this.idGenerator.toString());
+});
+
+
+  // get all questions 
+    router.get('/app/questions/', (req, res) => {
+      console.log('Query All questions');
+      this.Questions.retrieveAllQuestions(res);
+  });
+
+  // get questions of a particular question bank
+    router.get('/app/questions/:quesBankID', (req, res) => {
+      var id = req.params.quesBankID;
+      console.log('Query single list with id: ' + id);
+      this.Questions.retrieveQuestionsDetails(res, {quesBankID: id});
+  });
+
+  // post data into questions table
+
+    router.post('/app/questions/', (req, res) => {
+      console.log(req.body);
+      var jsonObj = req.body;
+      jsonObj.quesBankID = this.idGenerator;
+      this.Questions.model.create([jsonObj], (err) => {
+          if (err) {
+              console.log('object creation failed');
+          }
+      });
+      res.send(this.idGenerator.toString());
+      this.idGenerator++;
+  });  
+
+  // delete question bank
+    router.delete('/app/questions/:quesid/', (req, res) => {
+      var id = req.params.quesid;
+      console.log('Delete QuestionBank with id: ' + id);
+      this.Questions.deleteQuestion(res, {quesid: id});
     });
 
     this.expressApp.use('/', router);

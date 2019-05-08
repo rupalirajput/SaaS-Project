@@ -19,14 +19,8 @@ class AccountModel {
             {
                 usernname: String,
                 password: String,
-                userid: Number,
                 firstName: String,
-                lastName: String,
-                email: String,
-                role: {
-                    type: String,
-                    enum : ['student','professor']
-                }
+                lastName: String
             }, {collection: 'accounts'}
         );
     }
@@ -35,28 +29,12 @@ class AccountModel {
         this.model = mongooseConnection.model<IAccountModel>("Accounts", this.schema);
     }
 
-    // Gets account given filter parameters
-    public retrieveAccountDetails(response:any, filter:Object) {
-        var query = this.model.find(filter);
-        query.exec( (err, itemArray) => {
-            if (!err) {
-                response.json(itemArray);
-            } else {
-                console.log(err);
-            };
-        });
-    }
-
-    // Gets all accounts
     public retrieveAllAcccounts(response:any): any {
         var query = this.model.find({});
-        query.exec( (err, itemArray) => {
-             if (!err) {
-                response.json(itemArray);
-            } else {
-                console.log(err);
-            };
+        query.exec( (err,itemArray) => {
+            response.json(itemArray) ;
         });
+
     }
 }
 export {AccountModel};

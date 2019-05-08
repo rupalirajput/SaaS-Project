@@ -33,5 +33,6 @@ To execute the server db and then the node server with the following commands:
 5. node AppServer.js 
 
 To test server #3, try the following URL on the browser, while the server is running:
-* http://localhost:1234/
-* http://localhost:1234/app/account
+* http://localhost:8080/
+* http://localhost:8080/app/list
+* http://localhost:8080/app/list/1
