@@ -26,7 +26,7 @@ class AccountModel {
                 role: {
                     type: String,
                     enum : ['student','professor']
-                }    
+                }
             }, {collection: 'accounts'}
         );
     }
@@ -35,6 +35,7 @@ class AccountModel {
         this.model = mongooseConnection.model<IAccountModel>("Accounts", this.schema);
     }
 
+    // Gets account given filter parameters
     public retrieveAccountDetails(response:any, filter:Object) {
         var query = this.model.find(filter);
         query.exec( (err, itemArray) => {
@@ -46,6 +47,7 @@ class AccountModel {
         });
     }
 
+    // Gets all accounts
     public retrieveAllAcccounts(response:any): any {
         var query = this.model.find({});
         query.exec( (err, itemArray) => {
@@ -55,6 +57,6 @@ class AccountModel {
                 console.log(err);
             };
         });
-    }   
+    }
 }
 export {AccountModel};
