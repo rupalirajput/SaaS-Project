@@ -218,6 +218,22 @@
     <None Include="images\sort_desc.png" />
     <None Include="images\sort_desc_disabled.png" />
     <None Include="css\style.css" />
+    <None Include="model\ReportModel.ts" />
+    <None Include="interfaces\IReportModel.js" />
+    <None Include="interfaces\IReportModel.ts" />
+    <None Include="interfaces\IAccountModel.js" />
+    <None Include="model\AccountModel.js" />
+    <None Include="model\ReportModel.js" />
+    <None Include="pages\changePassword.html" />
+    <None Include="pages\forgotPassword.html" />
+    <None Include="pages\forgotUsername.html" />
+    <None Include="pages\loginPage.html" />
+    <None Include="pages\loginPage2.html" />
+    <None Include="pages\newLoginPage.html" />
+    <None Include="pages\report.html" />
+    <None Include="pages\takeTest.html" />
+    <None Include="pages\takeTest2.html" />
+    <None Include="pages\testDescription2.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

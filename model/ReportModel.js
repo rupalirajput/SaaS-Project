@@ -4,30 +4,26 @@ var Mongoose = require("mongoose");
 var DataAccess_1 = require("./../DataAccess");
 var mongooseConnection = DataAccess_1.DataAccess.mongooseConnection;
 var mongooseObj = DataAccess_1.DataAccess.mongooseInstance;
-var AccountModel = /** @class */ (function () {
-    function AccountModel() {
+var ReportModel = /** @class */ (function () {
+    function ReportModel() {
         this.createSchema();
         this.createModel();
     }
-    AccountModel.prototype.createSchema = function () {
+    ReportModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            usernname: String,
-            password: String,
+            reportid: Number,
             userid: Number,
-            firstName: String,
-            lastName: String,
-            email: String,
-            role: {
-                type: String,
-                "enum": ['student', 'professor']
-            }
-        }, { collection: 'accounts' });
+            quesBankID: Number,
+            score: Number,
+            strengths: String,
+            weaknesses: String
+        });
     };
-    AccountModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("Accounts", this.schema);
+    ReportModel.prototype.createModel = function () {
+        this.model = mongooseConnection.model("Reports", this.schema);
     };
     // Gets account given filter parameters
-    AccountModel.prototype.retrieveAccountDetails = function (response, filter) {
+    ReportModel.prototype.retrieveSingleReportDetails = function (response, filter) {
         var query = this.model.find(filter);
         query.exec(function (err, itemArray) {
             if (!err) {
@@ -39,9 +35,8 @@ var AccountModel = /** @class */ (function () {
             ;
         });
     };
-    // Gets all accounts
-    AccountModel.prototype.retrieveAllAcccounts = function (response) {
-        var query = this.model.find({});
+    ReportModel.prototype.retrieveAllReportDetails = function (response, filter) {
+        var query = this.model.find(filter);
         query.exec(function (err, itemArray) {
             if (!err) {
                 response.json(itemArray);
@@ -52,6 +47,6 @@ var AccountModel = /** @class */ (function () {
             ;
         });
     };
-    return AccountModel;
+    return ReportModel;
 }());
-exports.AccountModel = AccountModel;
+exports.ReportModel = ReportModel;

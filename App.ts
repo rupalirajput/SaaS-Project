@@ -10,6 +10,7 @@ import * as bodyParser from 'body-parser';
 import {AccountModel} from './model/AccountModel';
 //import {TaskModel} from './model/TaskModel';
 import {DataAccess} from './DataAccess';
+import {ReportModel} from './model/ReportModel';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -17,9 +18,11 @@ class App {
   // ref to Express instance
   public expressApp: express.Application;
   public Accounts:AccountModel;
+  public Reports:ReportModel;
   //public Tasks:TaskModel;
   public idGenerator:number;
   public questionIdGenerator:number;
+
     
 
   //Run configuration methods on the Express instance.
@@ -30,6 +33,7 @@ class App {
     this.idGenerator = 100;
     this.questionIdGenerator = 1;
     this.Accounts = new AccountModel();
+    this.Reports = new ReportModel();
     //this.Tasks = new TaskModel();
   }
 
@@ -70,81 +74,21 @@ class App {
         res.send(this.idGenerator.toString());
         this.idGenerator++;
       });
-
-
-        // get API for retriving all questions
-    router.get('/app/question/', (req, res) => {
-        console.log('Query All questions');
-        this.Questions.retrieveAllQuestions(res);
-    });
-
-      // get API for retriving single question by questionid
-    router.get('/app/question/:questionid', (req, res) => {
-        var id = req.params.questionid;
-        console.log('Query single question with id: ' + id);
-        this.Questions.retrieveQuestionDetails(res, {questionid: id});
-    });
-
-      // post API for creating an question
-    router.post('/app/question/', (req, res) => {
-        console.log(req.body);
-        var jsonObj = req.body;
-        jsonObj.questionid = this.questionIdGenerator;
-        this.Questions.model.create([jsonObj], (err) => {
-            if (err) {
-                console.log('question creation failed');
-            }
-        });
-        res.send(this.questionIdGenerator.toString());
-        this.questionIdGenerator++;
-      });
-
-      // update a specific question
-    router.put('/app/question/:questionid', (req, res) => {
-        console.log(req.body);
-        var jsonObj = req.body;
-        var id = req.params.questionid;
-        jsonObj.questionid = this.questionIdGenerator;
-        this.Questions.model.update([jsonObj],{questionid: id}, (err) => {
-            if (err) {
-                console.log('question updation failed');
-            }
-        });
-    });
-
-        // delete API for deleting single question by questionid
-    router.delete('/app/question/:questionid', (req, res) => {
-        var id = req.params.questionid;
-        console.log('Delete single question with id: ' + id);
-        this.Questions.deleteQuestionDetails(res, {questionid: id}, (err) => {
-            if (err) {
-                console.log('question deletion failed');
-            }
-        });
-    });
-
+           
         // get API for getting all reports
-    router.get('/app/account/:userid/reports', (req, res) => {
-      var id = req.params.userid;
-      console.log("Query single user's reports with id:" + id);
-      this.Reports.retrieveAllReportDetails(res, {userid: id}, (err) => {
-        if (err){
-          console.log('failed to retrieve all reports');
-        }
-      });
+    router.get('/app/report/:userid/reports', (req, res) => {
+        var id = req.params.userid;
+        console.log("Query single user's reports with id:" + id);
+        this.Reports.retrieveAllReportDetails(res, {userid: id});
     });
     
       // get API for getting a single report
-    router.get('/app/account/:userid/reports/:reportid', (req, res) => {
-      var id = req.params.userid;
-      var reportid = req.params.reportid;
-      console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
-      this.Reports.retrieveSingleReportDetails(res, {userid: id}, 
-        {reportid: reportid}, (err) => {
-          if (err) {
-            console.log('failed to retrieve single report');
-          }
-        });
+    router.get('/app/report/:userid/reports/:reportid', (req, res) => {
+        var id = req.params.userid;
+        var reportid = req.params.reportid;
+        console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
+        this.Reports.retrieveSingleReportDetails(res, {userid: id, reportid: reportid});
+    
     });
 
     this.expressApp.use('/', router);

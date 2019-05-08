@@ -25,3 +25,27 @@ accountsCollection.insert(
       role: "professor"
 }
 )
+db.createCollection('reports')
+reportCollection = db.getCollection("reports")
+reportCollection.remove({})
+reportCollection.insert(
+{
+      reportid: 1,
+      userid: 1,
+      quesBankID: 101,
+      score: 87,
+      strengths: "Slopes of lines",
+      weaknesses: "Horizontal and Vertical Lines"
+    }
+)
+reportCollection.insert(
+{
+    reportid:2,
+    userid: 1,
+    quesBankID: 102,
+    score: 65,
+    strengths: "Newton's Laws of Motion",
+    weaknesses: "Fluid Dynamics"
+    
+    }
+)

@@ -3,7 +3,6 @@ exports.__esModule = true;
 var Mongoose = require("mongoose");
 var DataAccess = /** @class */ (function () {
     function DataAccess() {
-        //this.mongoSetup();
         DataAccess.connect();
     }
     DataAccess.connect = function () {
