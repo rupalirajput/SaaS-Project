@@ -4,15 +4,9 @@ class DataAccess {
     static mongooseInstance: any;
     static mongooseConnection: Mongoose.Connection;
     static DB_CONNECTION_STRING:string = 'mongodb://dbAdmin:test@localhost:27017/QuizAppSample?authSource=admin';
-    public mongoUrl: string = 'mongodb://dbAdmin:test@localhost:27017/QuizAppSample?authSource=admin';  
-
+ 
     constructor () {
-        this.mongoSetup();
-    }
-
-    private mongoSetup(): void{
-        Mongoose.Promise = global.Promise;
-        Mongoose.connect(this.mongoUrl);
+        DataAccess.connect();
     }
 
     static connect (): Mongoose.Connection {

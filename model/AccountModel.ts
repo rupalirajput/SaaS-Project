@@ -19,27 +19,42 @@ class AccountModel {
             {
                 usernname: String,
                 password: String,
+                userid: Number,
                 firstName: String,
-                lastName: String
+                lastName: String,
+                email: String,
+                role: {
+                    type: String,
+                    enum : ['student','professor']
+                }    
             }, {collection: 'accounts'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IAccountModel>("Account", this.schema);
+        this.model = mongooseConnection.model<IAccountModel>("Accounts", this.schema);
     }
 
-    public retrieveAllAcccounts(response:any): any {
-        var PUser = Mongoose.model('accounts', this.schema);
-        PUser.find({}).exec(function(err, result) {
+    public retrieveAccountDetails(response:any, filter:Object) {
+        var query = this.model.find(filter);
+        query.exec( (err, itemArray) => {
             if (!err) {
-               response.json(result) ;
+                response.json(itemArray);
             } else {
                 console.log(err);
             };
         });
-
-
     }
+
+    public retrieveAllAcccounts(response:any): any {
+        var query = this.model.find({});
+        query.exec( (err, itemArray) => {
+             if (!err) {
+                response.json(itemArray);
+            } else {
+                console.log(err);
+            };
+        });
+    }   
 }
 export {AccountModel};

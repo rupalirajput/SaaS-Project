@@ -3,13 +3,9 @@ exports.__esModule = true;
 var Mongoose = require("mongoose");
 var DataAccess = /** @class */ (function () {
     function DataAccess() {
-        this.mongoUrl = 'mongodb://dbAdmin:test@localhost:27017/QuizAppSample?authSource=admin';
-        this.mongoSetup();
+        //this.mongoSetup();
+        DataAccess.connect();
     }
-    DataAccess.prototype.mongoSetup = function () {
-        Mongoose.Promise = global.Promise;
-        Mongoose.connect(this.mongoUrl);
-    };
     DataAccess.connect = function () {
         if (this.mongooseInstance)
             return this.mongooseInstance;

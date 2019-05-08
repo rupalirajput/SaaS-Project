@@ -5,16 +5,23 @@ accountsCollection.remove({})
 accountsCollection.insert(
 {
 	  username: "ABC",
-	  password: "1234",
+      password: "1234",
+      userid: 1,
 	  firstName: "ABC",
-	  lastName: "XYZ"
+      lastName: "XYZ",
+      email: "abc@gmail.com",
+      role: "student"
+
 }
 )
 accountsCollection.insert(
 {
       username: "PQR",
       password: "1234",
+      userid: 2,
       firstName: "PQR",
-      lastName: "OPQ"
+      lastName: "OPQ",
+      email: "pqr@gmail.com",
+      role: "professor"
 }
 )
