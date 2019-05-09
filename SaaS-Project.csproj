@@ -234,6 +234,17 @@
     <None Include="pages\takeTest.html" />
     <None Include="pages\takeTest2.html" />
     <None Include="pages\testDescription2.html" />
+    <None Include="model\QuestionBankModel.js" />
+    <None Include="model\QuestionBankModel.ts" />
+    <None Include="model\QuestionsModel.js" />
+    <None Include="model\QuestionsModel.ts" />
+    <None Include="interfaces\IQuestionBankModel.js" />
+    <None Include="interfaces\IQuestionBankModel.ts" />
+    <None Include="interfaces\IQuestionsModel.js" />
+    <None Include="interfaces\IQuestionsModel.ts" />
+    <None Include="pages\student.html" />
+    <None Include="pages\professor.html" />
+    <None Include="pages\testDescription.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
