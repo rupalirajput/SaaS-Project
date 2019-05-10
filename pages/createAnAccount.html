@@ -26,53 +26,146 @@
 </head>
 
 <body>
-    <!-- BANNER -->
-    <div class="header-top-area">
-        <div class="container">
+
+  <!-- BANNER -->
+  <div class="header-top-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="logo-area">
+            <h4>ADAPTIVE PRACTICE TEST</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-8 col-xs-offset-3">
+
+      <!-- BEGIN FORM -->
+      <div class="form-example-wrap mg-t-30">
+        <br>
+        <div class = "row">
+          <div class="col-xs-12 col-s-3">
+            <h4 class="text-center" style="font-size:large; color:#5e5e5e">Create an Account</h4>
+          </div>
+        </div>
+        <br><br>
+
+        <!-- SELECT ROLE -->
+        <div class="form-example-int form-horizental">
+          <div class="form-group">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="logo-area">
-                      <h4>ADAPTIVE PRACTICE TEST</h4>
-                    </div>
-                </div>
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label class="hrzn-fm">Role</label>
+              </div>
+              <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12 text-center">
+                <select name="Role">
+                  <option value="Student" style="color:#5e5e5e">Student</option>
+                  <option value="Professor" style="color:#5e5e5e">Professor</option>
+                </select>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <div align="center">
-        <div class="data-table-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md- col-sm-12 col-xs-12">
-                        <div class="data-table-list">
-                            <div class="basic-tb-hd">
-                            </div>
-                            <div class="data-table-area">
-                                <div class="container">
-                                    <table id="data-table-basic" class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th align="center">Create an Account</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
-                                            <tr><td> Role <td><select name="Role"><option value="Student">Student</option><option value="Professor">Professor</option></select> </td></tr>
-                                            <tr><td> Username <td><input type="text"></td></tr>
-                                            <tr><td> Email ID <td><input type="text" name="abc@de.com"></td></tr>
-                                            <tr><td> Password <td><input type="password"></td></tr>
-                                            <tr><td> Confirm Password <td><input type="password"></td></tr>
-
-                                            <tr><td> <button type="button" class="btn btn-success"> Submit </button>  OR <td> <button type="button" class="btn btn-success"> Cancel </button></tr>
-                                            <tr><td> <button type="button" class="btn btn-success"> Facebook Login </button></td></tr>
-</tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- ENTER EMAIL -->
+        <div class="form-example-int form-horizental">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label class="hrzn-fm">Email</label>
+              </div>
+              <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                <div class="nk-int-st">
+                  <input type="text" class="form-control input-sm">
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+
+        <!-- ENTER USERNAME -->
+        <div class="form-example-int form-horizental mg-t-15">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label class="hrzn-fm">Username</label>
+              </div>
+              <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                <div class="nk-int-st">
+                  <input type="text" class="form-control input-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENTER PASSWORD -->
+        <div class="form-example-int form-horizental">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label class="hrzn-fm">Password</label>
+              </div>
+              <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                <div class="nk-int-st">
+                  <input type="password" class="form-control input-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="form-example-int form-horizental">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label class="hrzn-fm">Confirm Password</label>
+              </div>
+              <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                <div class="nk-int-st">
+                  <input type="password" class="form-control input-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <!-- BEGIN SUBMIT FORM -->
+        <div class="form-example-int mg-t-15">
+
+          <!-- SUBMIT OR CANCEL -->
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button type="button" class="btn btn-success notika-btn-success" onclick="location.href = 'loginPage.html';">Submit</button>
+              <button type="button" class="btn btn-warning" onclick="location.href = 'loginPage.html';">Cancel</button>
+            </div>
+          </div>
+          <div class="row">
+            <br>
+            <div class ="col-xs-12 text-center">
+              <p style="color: #5e5e5e"> OR </p>
+            </div>
+          </div>
+
+          <!-- CREATE ACCOUNT USING FACEBOOK -->
+          <div class="row text-center">
+            <image src="https://fashionbossblogdotcom.files.wordpress.com/2014/09/facebook_icon2.png" style="height: 50px; width:50px; cursor: pointer"/>
+          </div>
+        </div>
+        <!-- END SUBMIT FORM -->
+        
+      </div>
+      <!-- END FORM -->
+
     </div>
+  </div>
+  <br><br>
 </body>
+
 </html>
