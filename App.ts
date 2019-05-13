@@ -173,6 +173,7 @@ class App {
       this.Questions.deleteQuestion(res, {quesid: id});
     });
 
+     });
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
@@ -186,5 +187,4 @@ class App {
   }
 
 }
-
 export {App};
