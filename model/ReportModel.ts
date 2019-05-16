@@ -23,7 +23,7 @@ class ReportModel {
                 score: Number,
                 strengths: String,
                 weaknesses: String
-            }, {collection: 'reports'}
+            },
         );
     }
 
