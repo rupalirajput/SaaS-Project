@@ -206,19 +206,19 @@ class App {
   });
 
   // get questions of a particular question bank
-    router.get('/app/questions/:quesBankID', (req, res) => {
+    router.get('/app/questions/:quesBankID/', (req, res) => {
       var id = req.params.quesBankID;
       console.log('Query single list with id: ' + id);
       this.Questions.retrieveQuestionsDetails(res, {quesBankID: id});
   });
 
   // post data into questions table
-
-    router.post('/app/questions/', (req, res) => {
+    router.post('/app/questions/:quesBankID/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
-      jsonObj.quesBankID = this.idGenerator;
-      this.Questions.model.create([jsonObj], (err) => {
+      var id = req.params.quesBankID;
+      jsonObj.quesid = this.idGenerator;
+      this.Questions.model.create([jsonObj], {quesBankID: id}, (err) => {
           if (err) {
               console.log('object creation failed');
           }
