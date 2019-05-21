@@ -17,7 +17,7 @@ var ReportModel = /** @class */ (function () {
             score: Number,
             strengths: String,
             weaknesses: String
-        }, { collection: 'reports' });
+        });
     };
     ReportModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("Reports", this.schema);

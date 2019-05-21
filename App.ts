@@ -49,7 +49,10 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
-   
+
+
+    // ACCOUNTS
+
     router.get('/app/account/', (req, res) => {
         console.log('Query All account');
         this.Accounts.retrieveAllAcccounts(res);
@@ -75,23 +78,53 @@ class App {
         res.send(this.idGenerator.toString());
         this.idGenerator++;
       });
-           
-        // get API for getting all reports
+
+
+
+
+
+
+
+
+      // REPORTS
+
+    // get API for getting all reports
     router.get('/app/report/:userid/reports', (req, res) => {
         var id = req.params.userid;
         console.log("Query single user's reports with id:" + id);
         this.Reports.retrieveAllReportDetails(res, {userid: id});
     });
-    
+
       // get API for getting a single report
     router.get('/app/report/:userid/reports/:reportid', (req, res) => {
         var id = req.params.userid;
         var reportid = req.params.reportid;
         console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
         this.Reports.retrieveSingleReportDetails(res, {userid: id, reportid: reportid});
-    
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // QUESTION BANKS
+
   // retrive all questionBanks
-    router.get('/app/questionBanks/', (req, res) => {
+    router.get('/app/questionbanks/', (req, res) => {
       console.log('Query All questionBanks');
       this.QuestionBanks.retrieveAllQuestionBanks(res);
     });
@@ -138,7 +171,36 @@ class App {
 });
 
 
-  // get all questions 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // QUESTIONS
+
+  // get all questions
     router.get('/app/questions/', (req, res) => {
       console.log('Query All questions');
       this.Questions.retrieveAllQuestions(res);
@@ -164,16 +226,21 @@ class App {
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
-  });  
+  });
 
-  // delete question bank
-    router.delete('/app/questions/:quesid/', (req, res) => {
-      var id = req.params.quesid;
-      console.log('Delete QuestionBank with id: ' + id);
-      this.Questions.deleteQuestion(res, {quesid: id});
-    });
+  // delete question
+  router.delete('/app/questions/:quesid/', (req, res) => {
+    var id = req.params.quesid;
+    console.log('Delete QuestionBank with id: ' + id);
+    this.Questions.deleteQuestion(res, {quesid: id});
+  });
 
-     });
+
+
+
+
+
+
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
@@ -183,7 +250,7 @@ class App {
     this.expressApp.use('/img', express.static(path.join(__dirname, '/img')))
     this.expressApp.use('/js', express.static(path.join(__dirname, '/js')));
     this.expressApp.use('/', express.static(path.join(__dirname, '/pages')));
-    
+
   }
 
 }

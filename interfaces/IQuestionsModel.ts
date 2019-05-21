@@ -1,16 +1,11 @@
 import Mongoose = require("mongoose");
 
 interface IQuestionsModel extends Mongoose.Document {
-    quesBankID: Number;
-    questions: [
-          {
-                quesid : Number;
-                questiontext : String;
-                description : String;
-                options:[{opt1:String,opt2:String}];
-                answer: String;
-
-          }
-        ]
+  questionBankID: Number;
+  questionID: Number;
+  questionText: String;
+  category: String;
+  options: [String, String, String, String];
+  answer: String;
 }
 export {IQuestionsModel};
