@@ -11,17 +11,13 @@ var QuestionsModel = /** @class */ (function () {
     }
     QuestionsModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            quesBankID: Number,
-            questions: [
-                {
-                    quesid: Number,
-                    questiontext: String,
-                    description: String,
-                    options: [{ opt1: String, opt2: String }],
-                    answer: String
-                }
-            ]
-        });
+            questionBankID: Number,
+            questionID: Number,
+            questionText: String,
+            category: String,
+            options: [String, String, String, String],
+            answer: String
+        }, { collection: 'questions' });
     };
     QuestionsModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("questions", this.schema);
@@ -29,7 +25,12 @@ var QuestionsModel = /** @class */ (function () {
     QuestionsModel.prototype.retrieveAllQuestions = function (response) {
         var query = this.model.find({});
         query.exec(function (err, itemArray) {
-            response.json(itemArray);
+            if (!err) {
+                response.json(itemArray);
+            }
+            else {
+                console.log(err);
+            }
         });
     };
     QuestionsModel.prototype.retrieveQuestionsDetails = function (response, filter) {

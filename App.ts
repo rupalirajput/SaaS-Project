@@ -4,8 +4,6 @@ import * as logger from 'morgan';
 import * as mongodb from 'mongodb';
 import * as url from 'url';
 import * as bodyParser from 'body-parser';
-//var MongoClient = require('mongodb').MongoClient;
-//var Q = require('q');
 
 import {AccountModel} from './model/AccountModel';
 import {QuestionBankModel} from './model/QuestionBankModel';
@@ -34,7 +32,6 @@ class App {
     this.idGenerator = 200;
     this.Accounts = new AccountModel();
     this.Reports = new ReportModel();
-    //this.Tasks = new TaskModel();
     this.QuestionBanks = new QuestionBankModel();
     this.Questions = new QuestionsModel();
   }
@@ -49,21 +46,24 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
-   
-    router.get('/app/account/', (req, res) => {
+
+
+    // ACCOUNTS
+
+    router.get('/account/', (req, res) => {
         console.log('Query All account');
         this.Accounts.retrieveAllAcccounts(res);
     });
 
       // get API for retriving single account by userid
-    router.get('/app/account/:userid', (req, res) => {
+    router.get('/account/:userid', (req, res) => {
         var id = req.params.userid;
         console.log('Query single user with id: ' + id);
         this.Accounts.retrieveAccountDetails(res, {userid: id});
     });
 
       // post API for creating an account
-    router.post('/app/account/', (req, res) => {
+    router.post('/account/', (req, res) => {
         console.log(req.body);
         var jsonObj = req.body;
         jsonObj.userid = this.idGenerator;
@@ -75,35 +75,65 @@ class App {
         res.send(this.idGenerator.toString());
         this.idGenerator++;
       });
-           
-        // get API for getting all reports
-    router.get('/app/report/:userid/reports', (req, res) => {
+
+
+
+
+
+
+
+
+      // REPORTS
+
+    // get API for getting all reports
+    router.get('/report/:userid/reports', (req, res) => {
         var id = req.params.userid;
         console.log("Query single user's reports with id:" + id);
         this.Reports.retrieveAllReportDetails(res, {userid: id});
     });
-    
+
       // get API for getting a single report
-    router.get('/app/report/:userid/reports/:reportid', (req, res) => {
+    router.get('/report/:userid/reports/:reportid', (req, res) => {
         var id = req.params.userid;
         var reportid = req.params.reportid;
         console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
         this.Reports.retrieveSingleReportDetails(res, {userid: id, reportid: reportid});
-    
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // QUESTION BANKS
+
   // retrive all questionBanks
-    router.get('/app/questionBanks/', (req, res) => {
+    router.get('/questionbanks/', (req, res) => {
       console.log('Query All questionBanks');
       this.QuestionBanks.retrieveAllQuestionBanks(res);
     });
   // retrive questionBank with ID
-    router.get('/app/questionBanks/:quesBankID/', (req, res) => {
+    router.get('/questionBanks/:quesBankID/', (req, res) => {
       var id = req.params.quesBankID;
       console.log('Query single list with id: ' + id);
       this.QuestionBanks.retrieveQuestionBankDetails(res, {quesBankID: id});
     });
 
   // post data in questionBank
-    router.post('/app/questionBanks/', (req, res) => {
+    router.post('/questionBanks/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
       jsonObj.quesBankID = this.idGenerator;
@@ -117,14 +147,14 @@ class App {
   });
 
   // delete question bank
-    router.delete('/app/questionBanks/:quesBankID/', (req, res) => {
+    router.delete('/questionBanks/:quesBankID/', (req, res) => {
       var id = req.params.quesBankID;
       console.log('Delete QuestionBank with id: ' + id);
       this.QuestionBanks.deleteQuestionBank(res, {quesBankID: id});
     });
 
   // update question bank
-  router.put('/app/questionBanks/:quesBankID/', (req, res) => {
+  router.put('/questionBanks/:quesBankID/', (req, res) => {
     console.log(req.body);
     var jsonObj = req.body;
     var id = req.params.quesBankID;
@@ -138,8 +168,37 @@ class App {
 });
 
 
-  // get all questions 
-    router.get('/app/questions/', (req, res) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // QUESTIONS
+
+  // get all questions
+    router.get('/questions/', (req, res) => {
       console.log('Query All questions');
       this.Questions.retrieveAllQuestions(res);
   });
@@ -164,16 +223,21 @@ class App {
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
-  });  
+  });
 
-  // delete question bank
-    router.delete('/app/questions/:quesid/', (req, res) => {
-      var id = req.params.quesid;
-      console.log('Delete QuestionBank with id: ' + id);
-      this.Questions.deleteQuestion(res, {quesid: id});
-    });
+  // delete question
+  router.delete('/app/questions/:quesid/', (req, res) => {
+    var id = req.params.quesid;
+    console.log('Delete QuestionBank with id: ' + id);
+    this.Questions.deleteQuestion(res, {quesid: id});
+  });
 
-     });
+
+
+
+
+
+
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
@@ -183,7 +247,7 @@ class App {
     this.expressApp.use('/img', express.static(path.join(__dirname, '/img')))
     this.expressApp.use('/js', express.static(path.join(__dirname, '/js')));
     this.expressApp.use('/', express.static(path.join(__dirname, '/pages')));
-    
+
   }
 
 }
