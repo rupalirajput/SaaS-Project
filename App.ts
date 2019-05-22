@@ -53,20 +53,20 @@ class App {
 
     // ACCOUNTS
 
-    router.get('/app/account/', (req, res) => {
+    router.get('/account/', (req, res) => {
         console.log('Query All account');
         this.Accounts.retrieveAllAcccounts(res);
     });
 
       // get API for retriving single account by userid
-    router.get('/app/account/:userid', (req, res) => {
+    router.get('/account/:userid', (req, res) => {
         var id = req.params.userid;
         console.log('Query single user with id: ' + id);
         this.Accounts.retrieveAccountDetails(res, {userid: id});
     });
 
       // post API for creating an account
-    router.post('/app/account/', (req, res) => {
+    router.post('/account/', (req, res) => {
         console.log(req.body);
         var jsonObj = req.body;
         jsonObj.userid = this.idGenerator;
@@ -89,14 +89,14 @@ class App {
       // REPORTS
 
     // get API for getting all reports
-    router.get('/app/report/:userid/reports', (req, res) => {
+    router.get('/report/:userid/reports', (req, res) => {
         var id = req.params.userid;
         console.log("Query single user's reports with id:" + id);
         this.Reports.retrieveAllReportDetails(res, {userid: id});
     });
 
       // get API for getting a single report
-    router.get('/app/report/:userid/reports/:reportid', (req, res) => {
+    router.get('/report/:userid/reports/:reportid', (req, res) => {
         var id = req.params.userid;
         var reportid = req.params.reportid;
         console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
@@ -124,19 +124,19 @@ class App {
   // QUESTION BANKS
 
   // retrive all questionBanks
-    router.get('/app/questionbanks/', (req, res) => {
+    router.get('/questionbanks/', (req, res) => {
       console.log('Query All questionBanks');
       this.QuestionBanks.retrieveAllQuestionBanks(res);
     });
   // retrive questionBank with ID
-    router.get('/app/questionBanks/:quesBankID/', (req, res) => {
+    router.get('/questionBanks/:quesBankID/', (req, res) => {
       var id = req.params.quesBankID;
       console.log('Query single list with id: ' + id);
       this.QuestionBanks.retrieveQuestionBankDetails(res, {quesBankID: id});
     });
 
   // post data in questionBank
-    router.post('/app/questionBanks/', (req, res) => {
+    router.post('/questionBanks/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
       jsonObj.quesBankID = this.idGenerator;
@@ -150,14 +150,14 @@ class App {
   });
 
   // delete question bank
-    router.delete('/app/questionBanks/:quesBankID/', (req, res) => {
+    router.delete('/questionBanks/:quesBankID/', (req, res) => {
       var id = req.params.quesBankID;
       console.log('Delete QuestionBank with id: ' + id);
       this.QuestionBanks.deleteQuestionBank(res, {quesBankID: id});
     });
 
   // update question bank
-  router.put('/app/questionBanks/:quesBankID/', (req, res) => {
+  router.put('/questionBanks/:quesBankID/', (req, res) => {
     console.log(req.body);
     var jsonObj = req.body;
     var id = req.params.quesBankID;
@@ -201,7 +201,7 @@ class App {
   // QUESTIONS
 
   // get all questions
-    router.get('/app/questions/', (req, res) => {
+    router.get('/questions/', (req, res) => {
       console.log('Query All questions');
       this.Questions.retrieveAllQuestions(res);
   });

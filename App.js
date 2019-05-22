@@ -35,18 +35,18 @@ var App = /** @class */ (function () {
         var _this = this;
         var router = express.Router();
         // ACCOUNTS
-        router.get('/app/account/', function (req, res) {
+        router.get('/account/', function (req, res) {
             console.log('Query All account');
             _this.Accounts.retrieveAllAcccounts(res);
         });
         // get API for retriving single account by userid
-        router.get('/app/account/:userid', function (req, res) {
+        router.get('/account/:userid', function (req, res) {
             var id = req.params.userid;
             console.log('Query single user with id: ' + id);
             _this.Accounts.retrieveAccountDetails(res, { userid: id });
         });
         // post API for creating an account
-        router.post('/app/account/', function (req, res) {
+        router.post('/account/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             jsonObj.userid = _this.idGenerator;
@@ -60,13 +60,13 @@ var App = /** @class */ (function () {
         });
         // REPORTS
         // get API for getting all reports
-        router.get('/app/report/:userid/reports', function (req, res) {
+        router.get('/report/:userid/reports', function (req, res) {
             var id = req.params.userid;
             console.log("Query single user's reports with id:" + id);
             _this.Reports.retrieveAllReportDetails(res, { userid: id });
         });
         // get API for getting a single report
-        router.get('/app/report/:userid/reports/:reportid', function (req, res) {
+        router.get('/report/:userid/reports/:reportid', function (req, res) {
             var id = req.params.userid;
             var reportid = req.params.reportid;
             console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
@@ -74,18 +74,18 @@ var App = /** @class */ (function () {
         });
         // QUESTION BANKS
         // retrive all questionBanks
-        router.get('/app/questionbanks/', function (req, res) {
+        router.get('/questionbanks/', function (req, res) {
             console.log('Query All questionBanks');
             _this.QuestionBanks.retrieveAllQuestionBanks(res);
         });
         // retrive questionBank with ID
-        router.get('/app/questionBanks/:quesBankID/', function (req, res) {
+        router.get('/questionBanks/:quesBankID/', function (req, res) {
             var id = req.params.quesBankID;
             console.log('Query single list with id: ' + id);
             _this.QuestionBanks.retrieveQuestionBankDetails(res, { quesBankID: id });
         });
         // post data in questionBank
-        router.post('/app/questionBanks/', function (req, res) {
+        router.post('/questionBanks/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             jsonObj.quesBankID = _this.idGenerator;
@@ -98,13 +98,13 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         // delete question bank
-        router["delete"]('/app/questionBanks/:quesBankID/', function (req, res) {
+        router["delete"]('/questionBanks/:quesBankID/', function (req, res) {
             var id = req.params.quesBankID;
             console.log('Delete QuestionBank with id: ' + id);
             _this.QuestionBanks.deleteQuestionBank(res, { quesBankID: id });
         });
         // update question bank
-        router.put('/app/questionBanks/:quesBankID/', function (req, res) {
+        router.put('/questionBanks/:quesBankID/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             var id = req.params.quesBankID;
@@ -118,7 +118,7 @@ var App = /** @class */ (function () {
         });
         // QUESTIONS
         // get all questions
-        router.get('/app/questions/', function (req, res) {
+        router.get('/questions/', function (req, res) {
             console.log('Query All questions');
             _this.Questions.retrieveAllQuestions(res);
         });
