@@ -156,3 +156,126 @@ questionsCollection.insert(
   }
 )
 // END: Questions
+
+
+// BEGIN: Test
+db.createCollection('test')
+testCollection = db.getCollection("test")
+testCollection.remove({})
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 1011,
+	 	orderOfQuestionInTest : 1,
+		category : "Physics",
+		isCorrect : 0
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 1015,
+	 	orderOfQuestionInTest : 2,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 10120,
+	 	orderOfQuestionInTest : 3,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 1017,
+	 	orderOfQuestionInTest : 4,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 10115,
+	 	orderOfQuestionInTest : 5,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 10110,
+	 	orderOfQuestionInTest : 6,
+		category : "Physics",
+		isCorrect : 0
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 10150,
+	 	orderOfQuestionInTest : 7,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 1013,
+	 	orderOfQuestionInTest : 2,
+		category : "Physics",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 1,
+		questionBankCreatorID : 1,
+		testTakeerID : 2,
+		questionBankID : 101,
+		questionID : 10133,
+	 	orderOfQuestionInTest : 2,
+		category : "Physics",
+		isCorrect : 0
+	}
+)
+// END: Test
