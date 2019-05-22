@@ -32,7 +32,6 @@ class QuestionsModel {
   }
 
   public retrieveAllQuestions(response:any): any {
-    console.log("Im here")
     var query = this.model.find({});
     query.exec( (err, itemArray) => {
       if (!err)

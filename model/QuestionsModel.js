@@ -23,7 +23,6 @@ var QuestionsModel = /** @class */ (function () {
         this.model = mongooseConnection.model("questions", this.schema);
     };
     QuestionsModel.prototype.retrieveAllQuestions = function (response) {
-        console.log("Im here");
         var query = this.model.find({});
         query.exec(function (err, itemArray) {
             if (!err) {
