@@ -4,8 +4,6 @@ import * as logger from 'morgan';
 import * as mongodb from 'mongodb';
 import * as url from 'url';
 import * as bodyParser from 'body-parser';
-//var MongoClient = require('mongodb').MongoClient;
-//var Q = require('q');
 
 import {AccountModel} from './model/AccountModel';
 import {QuestionBankModel} from './model/QuestionBankModel';
@@ -34,7 +32,6 @@ class App {
     this.idGenerator = 200;
     this.Accounts = new AccountModel();
     this.Reports = new ReportModel();
-    //this.Tasks = new TaskModel();
     this.QuestionBanks = new QuestionBankModel();
     this.Questions = new QuestionsModel();
   }
