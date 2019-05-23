@@ -4,12 +4,11 @@ var path = require("path");
 var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-//var MongoClient = require('mongodb').MongoClient;
-//var Q = require('q');
 var AccountModel_1 = require("./model/AccountModel");
 var QuestionBankModel_1 = require("./model/QuestionBankModel");
 var QuestionsModel_1 = require("./model/QuestionsModel");
 var ReportModel_1 = require("./model/ReportModel");
+var TestModel_1 = require("./model/TestModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -20,9 +19,9 @@ var App = /** @class */ (function () {
         this.idGenerator = 200;
         this.Accounts = new AccountModel_1.AccountModel();
         this.Reports = new ReportModel_1.ReportModel();
-        //this.Tasks = new TaskModel();
         this.QuestionBanks = new QuestionBankModel_1.QuestionBankModel();
         this.Questions = new QuestionsModel_1.QuestionsModel();
+        this.Tests = new TestModel_1.TestModel();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -34,6 +33,11 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        router.use(function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
         // ACCOUNTS
         router.get('/account/', function (req, res) {
             console.log('Query All account');
@@ -123,17 +127,18 @@ var App = /** @class */ (function () {
             _this.Questions.retrieveAllQuestions(res);
         });
         // get questions of a particular question bank
-        router.get('/app/questions/:quesBankID', function (req, res) {
+        router.get('/app/questions/:quesBankID/', function (req, res) {
             var id = req.params.quesBankID;
             console.log('Query single list with id: ' + id);
             _this.Questions.retrieveQuestionsDetails(res, { quesBankID: id });
         });
         // post data into questions table
-        router.post('/app/questions/', function (req, res) {
+        router.post('/app/questions/:quesBankID/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.quesBankID = _this.idGenerator;
-            _this.Questions.model.create([jsonObj], function (err) {
+            var id = req.params.quesBankID;
+            jsonObj.quesid = _this.idGenerator;
+            _this.Questions.model.create([jsonObj], { quesBankID: id }, function (err) {
                 if (err) {
                     console.log('object creation failed');
                 }
@@ -146,6 +151,17 @@ var App = /** @class */ (function () {
             var id = req.params.quesid;
             console.log('Delete QuestionBank with id: ' + id);
             _this.Questions.deleteQuestion(res, { quesid: id });
+        });
+        // TESTS
+        router.get('/tests/', function (req, res) {
+            console.log('Query All tests');
+            _this.Tests.retrieveAllTests(res);
+        });
+        // get API for retriving single account by userid
+        router.get('/tests/:testid', function (req, res) {
+            var id = req.params.testid;
+            console.log('Query single test with id: ' + id);
+            _this.Tests.retrieveOneTest(res, { testID: id });
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
