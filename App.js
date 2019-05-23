@@ -33,6 +33,11 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        router.use(function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
         // ACCOUNTS
         router.get('/account/', function (req, res) {
             console.log('Query All account');
@@ -122,17 +127,18 @@ var App = /** @class */ (function () {
             _this.Questions.retrieveAllQuestions(res);
         });
         // get questions of a particular question bank
-        router.get('/app/questions/:quesBankID', function (req, res) {
+        router.get('/app/questions/:quesBankID/', function (req, res) {
             var id = req.params.quesBankID;
             console.log('Query single list with id: ' + id);
             _this.Questions.retrieveQuestionsDetails(res, { quesBankID: id });
         });
         // post data into questions table
-        router.post('/app/questions/', function (req, res) {
+        router.post('/app/questions/:quesBankID/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.quesBankID = _this.idGenerator;
-            _this.Questions.model.create([jsonObj], function (err) {
+            var id = req.params.quesBankID;
+            jsonObj.quesid = _this.idGenerator;
+            _this.Questions.model.create([jsonObj], { quesBankID: id }, function (err) {
                 if (err) {
                     console.log('object creation failed');
                 }
