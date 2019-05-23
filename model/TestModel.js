@@ -11,7 +11,7 @@ var TestModel = /** @class */ (function () {
     }
     TestModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            testDate: Number,
+            testID: Number,
             questionBankCreatorID: Number,
             testTakeerID: Number,
             questionBankID: Number,
@@ -39,8 +39,8 @@ var TestModel = /** @class */ (function () {
         });
     };
     // Gets all test records with one TestID
-    TestModel.prototype.retrieveOneTest = function (response, id) {
-        var query = this.model.find({ testID: id });
+    TestModel.prototype.retrieveOneTest = function (response, filter) {
+        var query = this.model.find(filter);
         query.exec(function (err, itemArray) {
             if (!err) {
                 response.json(itemArray);

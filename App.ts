@@ -10,6 +10,7 @@ import {QuestionBankModel} from './model/QuestionBankModel';
 import {QuestionsModel} from './model/QuestionsModel';
 import {DataAccess} from './DataAccess';
 import {ReportModel} from './model/ReportModel';
+import {TestModel} from './model/TestModel';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -18,11 +19,11 @@ class App {
   public expressApp: express.Application;
   public Accounts:AccountModel;
   public Reports:ReportModel;
-  //public Tasks:TaskModel;
   public idGenerator:number;
   public questionIdGenerator:number;
   public QuestionBanks:QuestionBankModel;
   public Questions:QuestionsModel;
+  public Tests:TestModel;
 
   //Run configuration methods on the Express instance.
   constructor() {
@@ -34,6 +35,7 @@ class App {
     this.Reports = new ReportModel();
     this.QuestionBanks = new QuestionBankModel();
     this.Questions = new QuestionsModel();
+    this.Tests = new TestModel();
   }
 
   // Configure Express middleware.
@@ -230,6 +232,22 @@ class App {
     var id = req.params.quesid;
     console.log('Delete QuestionBank with id: ' + id);
     this.Questions.deleteQuestion(res, {quesid: id});
+  });
+
+
+
+  // TESTS
+
+  router.get('/tests/', (req, res) => {
+      console.log('Query All tests');
+      this.Tests.retrieveAllTests(res);
+  });
+
+    // get API for retriving single account by userid
+  router.get('/tests/:testid', (req, res) => {
+      var id = req.params.testid;
+      console.log('Query single test with id: ' + id);
+      this.Tests.retrieveOneTest(res, {testID: id});
   });
 
 

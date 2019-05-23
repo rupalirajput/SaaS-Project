@@ -15,7 +15,7 @@ class TestModel {
     public createSchema(): void {
         this.schema = new Mongoose.Schema(
             {
-              testDate : Number,
+              testID : Number,
               questionBankCreatorID : Number,
               testTakeerID : Number,
               questionBankID : Number,
@@ -44,15 +44,15 @@ class TestModel {
     }
 
     // Gets all test records with one TestID
-    public retrieveOneTest(response:any, id: Number) {
-        var query = this.model.find({testID: id});
-        query.exec( (err, itemArray) => {
-            if (!err) {
-                response.json(itemArray);
-            } else {
-                console.log(err);
-            };
-        });
+    public retrieveOneTest(response:any, filter:Object) {
+      var query = this.model.find(filter);
+      query.exec( (err, itemArray) => {
+          if (!err) {
+              response.json(itemArray);
+          } else {
+              console.log(err);
+          };
+      });
     }
 }
 export {TestModel};
