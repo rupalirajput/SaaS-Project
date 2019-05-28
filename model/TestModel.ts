@@ -97,6 +97,6 @@ class TestModel {
 		category : String
 		isCorrect : Number
     */
-    //public submitAnswer()
+    //public submitAnswer(res)
 }
 export {TestModel};

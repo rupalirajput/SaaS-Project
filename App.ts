@@ -272,8 +272,21 @@ class App {
       this.Tests.retrieveRandomQuestion(res, id);
   });
 
-
-
+  // post API for submitting a question in a test
+  /*
+  router.post('test/:testid/:questionBankID/:questionID', (req, res) => {
+    console.log(req.body);
+    var jsonObj = req.body;
+    jsonObj.listId = this.idGenerator;
+    this.Lists.model.create([jsonObj], (err) => {
+        if (err) {
+            console.log('object creation failed');
+        }
+    });
+    res.send(this.idGenerator.toString());
+    this.idGenerator++;
+  });
+  */
 
 
 
