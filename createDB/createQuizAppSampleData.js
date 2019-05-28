@@ -102,7 +102,7 @@ questionsCollection.insert(
 				"12",
 				"144"
 			],
-    answer : "144"
+    answer : "4"
 	}
 )
 
@@ -119,7 +119,7 @@ questionsCollection.insert(
 				"11",
 				"14"
 			],
-    answer : "13"
+    answer : "2"
 	}
 )
 questionsCollection.insert(
@@ -135,7 +135,7 @@ questionsCollection.insert(
 				"displacement",
 				"speed"
 			],
-    answer: "vector"
+    answer: "2"
 	}
 )
 
@@ -152,7 +152,7 @@ questionsCollection.insert(
 				"speed = time/distance",
 				"None of the above"
 			],
-    answer : "speed = distance/time"
+    answer : "1"
   }
 )
 // END: Questions

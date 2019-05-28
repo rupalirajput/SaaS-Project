@@ -212,19 +212,27 @@ class App {
   });
 
   // get questions of a particular question bank
-    router.get('/app/questions/:quesBankID/', (req, res) => {
-      var id = req.params.quesBankID;
-      console.log('Query single list with id: ' + id);
-      this.Questions.retrieveQuestionsDetails(res, {quesBankID: id});
+    router.get('/questions/bank/:questionBankID/', (req, res) => {
+      var id = req.params.questionBankID;
+      console.log('Query question bank with id: ' + id);
+      this.Questions.retrieveQuestionsDetails(res, {questionBankID: id});
   });
 
-  // post data into questions table
-    router.post('/app/questions/:quesBankID/', (req, res) => {
+   // get question by question id
+    router.get('/questions/:questionID/', (req, res) => {
+      var id = req.params.questionID;
+      console.log('Query single question with id: ' + id);
+      this.Questions.retrieveQuestionByID(res, {questionID: id});
+  });
+
+
+  // insert data into questions table
+    router.post('/questions/bank/:questionID/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
-      var id = req.params.quesBankID;
-      jsonObj.quesid = this.idGenerator;
-      this.Questions.model.create([jsonObj], {quesBankID: id}, (err) => {
+      var id = req.params.questionBankID;
+      jsonObj.questionID = this.idGenerator;
+      this.Questions.model.create([jsonObj], {questionBankID: id}, (err) => {
           if (err) {
               console.log('object creation failed');
           }
@@ -234,10 +242,10 @@ class App {
   });
 
   // delete question
-  router.delete('/app/questions/:quesid/', (req, res) => {
-    var id = req.params.quesid;
+  router.delete('/questions/:questionID/', (req, res) => {
+    var id = req.params.questionID;
     console.log('Delete QuestionBank with id: ' + id);
-    this.Questions.deleteQuestion(res, {quesid: id});
+    this.Questions.deleteQuestion(res, {questionID: id});
   });
 
 

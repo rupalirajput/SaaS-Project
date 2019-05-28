@@ -46,9 +46,30 @@ class QuestionsModel {
   }
 
   public retrieveQuestionsDetails(response:any, filter:Object) {
-    var query = this.model.findOne(filter);
+    var query = this.model.find(filter);
     query.exec( (err, itemArray) => {
-      response.json(itemArray);
+      if (!err)
+      {
+        response.json(itemArray) ;
+      }
+      else
+      {
+        console.log(err);
+      }
+    });
+  }
+
+  public retrieveQuestionByID(response:any, filter:Object) {
+    var query = this.model.find(filter);
+    query.exec( (err, itemArray) => {
+      if (!err)
+      {
+        response.json(itemArray) ;
+      }
+      else
+      {
+        console.log(err);
+      }
     });
   }
 

@@ -34,9 +34,25 @@ var QuestionsModel = /** @class */ (function () {
         });
     };
     QuestionsModel.prototype.retrieveQuestionsDetails = function (response, filter) {
-        var query = this.model.findOne(filter);
+        var query = this.model.find(filter);
         query.exec(function (err, itemArray) {
-            response.json(itemArray);
+            if (!err) {
+                response.json(itemArray);
+            }
+            else {
+                console.log(err);
+            }
+        });
+    };
+    QuestionsModel.prototype.retrieveQuestionByID = function (response, filter) {
+        var query = this.model.find(filter);
+        query.exec(function (err, itemArray) {
+            if (!err) {
+                response.json(itemArray);
+            }
+            else {
+                console.log(err);
+            }
         });
     };
     QuestionsModel.prototype.deleteQuestion = function (response, filter) {

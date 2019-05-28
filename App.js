@@ -127,18 +127,24 @@ var App = /** @class */ (function () {
             _this.Questions.retrieveAllQuestions(res);
         });
         // get questions of a particular question bank
-        router.get('/app/questions/:quesBankID/', function (req, res) {
-            var id = req.params.quesBankID;
-            console.log('Query single list with id: ' + id);
-            _this.Questions.retrieveQuestionsDetails(res, { quesBankID: id });
+        router.get('/questions/bank/:questionBankID/', function (req, res) {
+            var id = req.params.questionBankID;
+            console.log('Query question bank with id: ' + id);
+            _this.Questions.retrieveQuestionsDetails(res, { questionBankID: id });
         });
-        // post data into questions table
-        router.post('/app/questions/:quesBankID/', function (req, res) {
+        // get question by question id
+        router.get('/questions/:questionID/', function (req, res) {
+            var id = req.params.questionID;
+            console.log('Query single question with id: ' + id);
+            _this.Questions.retrieveQuestionByID(res, { questionID: id });
+        });
+        // insert data into questions table
+        router.post('/questions/bank/:questionID/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            var id = req.params.quesBankID;
-            jsonObj.quesid = _this.idGenerator;
-            _this.Questions.model.create([jsonObj], { quesBankID: id }, function (err) {
+            var id = req.params.questionBankID;
+            jsonObj.questionID = _this.idGenerator;
+            _this.Questions.model.create([jsonObj], { questionBankID: id }, function (err) {
                 if (err) {
                     console.log('object creation failed');
                 }
@@ -147,10 +153,10 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         // delete question
-        router["delete"]('/app/questions/:quesid/', function (req, res) {
-            var id = req.params.quesid;
+        router["delete"]('/questions/:questionID/', function (req, res) {
+            var id = req.params.questionID;
             console.log('Delete QuestionBank with id: ' + id);
-            _this.Questions.deleteQuestion(res, { quesid: id });
+            _this.Questions.deleteQuestion(res, { questionID: id });
         });
         // TESTS
         router.get('/tests/', function (req, res) {
