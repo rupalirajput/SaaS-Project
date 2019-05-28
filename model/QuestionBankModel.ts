@@ -17,8 +17,8 @@ class QuestionBankModel {
     public createSchema(): void {
         this.schema = new Mongoose.Schema(
             {
-                quesBankID: Number,
-                quesBankName: String,
+                questionBankID: Number,
+                questionBankName: String,
                 duration: Number,
                 numberOfQuestions: Number,
                 keyConcepts: String,

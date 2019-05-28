@@ -83,16 +83,16 @@ var App = /** @class */ (function () {
             _this.QuestionBanks.retrieveAllQuestionBanks(res);
         });
         // retrive questionBank with ID
-        router.get('/questionBanks/:quesBankID/', function (req, res) {
-            var id = req.params.quesBankID;
+        router.get('/questionBanks/:questionBankID/', function (req, res) {
+            var id = req.params.questionBankID;
             console.log('Query single list with id: ' + id);
-            _this.QuestionBanks.retrieveQuestionBankDetails(res, { quesBankID: id });
+            _this.QuestionBanks.retrieveQuestionBankDetails(res, { questionBankID: id });
         });
         // post data in questionBank
         router.post('/questionBanks/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.quesBankID = _this.idGenerator;
+            jsonObj.questionBankID = _this.idGenerator;
             _this.QuestionBanks.model.create([jsonObj], function (err) {
                 if (err) {
                     console.log('object creation failed');
@@ -102,17 +102,17 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         // delete question bank
-        router["delete"]('/questionBanks/:quesBankID/', function (req, res) {
-            var id = req.params.quesBankID;
+        router["delete"]('/questionBanks/:questionBankID/', function (req, res) {
+            var id = req.params.questionBankID;
             console.log('Delete QuestionBank with id: ' + id);
-            _this.QuestionBanks.deleteQuestionBank(res, { quesBankID: id });
+            _this.QuestionBanks.deleteQuestionBank(res, { questionBankID: id });
         });
         // update question bank
-        router.put('/questionBanks/:quesBankID/', function (req, res) {
+        router.put('/questionBanks/:questionBankID/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            var id = req.params.quesBankID;
-            jsonObj.quesBankID = id;
+            var id = req.params.questionBankID;
+            jsonObj.questionBankID = id;
             _this.QuestionBanks.model.update([jsonObj], { questionid: id }, function (err) {
                 if (err) {
                     console.log('object creation failed');

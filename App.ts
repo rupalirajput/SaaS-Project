@@ -55,7 +55,7 @@ class App {
         next();
     });
 
-     
+
     // ACCOUNTS
 
     router.get('/account/', (req, res) => {
@@ -134,17 +134,17 @@ class App {
       this.QuestionBanks.retrieveAllQuestionBanks(res);
     });
   // retrive questionBank with ID
-    router.get('/questionBanks/:quesBankID/', (req, res) => {
-      var id = req.params.quesBankID;
+    router.get('/questionBanks/:questionBankID/', (req, res) => {
+      var id = req.params.questionBankID;
       console.log('Query single list with id: ' + id);
-      this.QuestionBanks.retrieveQuestionBankDetails(res, {quesBankID: id});
+      this.QuestionBanks.retrieveQuestionBankDetails(res, {questionBankID: id});
     });
 
   // post data in questionBank
     router.post('/questionBanks/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
-      jsonObj.quesBankID = this.idGenerator;
+      jsonObj.questionBankID = this.idGenerator;
       this.QuestionBanks.model.create([jsonObj], (err) => {
           if (err) {
               console.log('object creation failed');
@@ -155,18 +155,18 @@ class App {
   });
 
   // delete question bank
-    router.delete('/questionBanks/:quesBankID/', (req, res) => {
-      var id = req.params.quesBankID;
+    router.delete('/questionBanks/:questionBankID/', (req, res) => {
+      var id = req.params.questionBankID;
       console.log('Delete QuestionBank with id: ' + id);
-      this.QuestionBanks.deleteQuestionBank(res, {quesBankID: id});
+      this.QuestionBanks.deleteQuestionBank(res, {questionBankID: id});
     });
 
   // update question bank
-  router.put('/questionBanks/:quesBankID/', (req, res) => {
+  router.put('/questionBanks/:questionBankID/', (req, res) => {
     console.log(req.body);
     var jsonObj = req.body;
-    var id = req.params.quesBankID;
-    jsonObj.quesBankID = id;
+    var id = req.params.questionBankID;
+    jsonObj.questionBankID = id;
     this.QuestionBanks.model.update([jsonObj],{questionid: id}, (err) => {
         if (err) {
             console.log('object creation failed');

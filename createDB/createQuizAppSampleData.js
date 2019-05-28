@@ -37,7 +37,7 @@ reportCollection.insert(
 	{
     reportid : 1,
     userid : 1,
-    quesBankID : 101,
+    questionBankID : 101,
     score : 87,
     strengths : "Slopes of lines",
     weaknesses : "Horizontal and Vertical Lines"
@@ -48,7 +48,7 @@ reportCollection.insert(
 	{
     reportid :2,
     userid: 1,
-    quesBankID : 102,
+    questionBankID : 102,
     score : 65,
     strengths : "Newton's Laws of Motion",
     weaknesses : "Fluid Dynamics"
@@ -62,8 +62,8 @@ questionBanksCollection = db.getCollection("questionBanks")
 questionBanksCollection.remove({})
 questionBanksCollection.insert(
   {
-    quesBankID : 101,
-    quesBankName : "Mathematics",
+    questionBankID : 101,
+    questionBankName : "Mathematics",
 		duration: 60,
 		numberOfQuestions: 5,
 		keyConcepts: "Addition Subtraction",
@@ -77,8 +77,8 @@ questionBanksCollection.insert(
 
 questionBanksCollection.insert(
   {
-    quesBankID : 102,
-    quesBankName : "Physics",
+    questionBankID : 102,
+    questionBankName : "Physics",
 		duration: 60,
 		numberOfQuestions: 6,
 		keyConcepts: "Speed Direction Velocity",

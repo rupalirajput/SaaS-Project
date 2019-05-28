@@ -11,8 +11,8 @@ var QuestionBankModel = /** @class */ (function () {
     }
     QuestionBankModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            quesBankID: Number,
-            quesBankName: String,
+            questionBankID: Number,
+            questionBankName: String,
             duration: Number,
             numberOfQuestions: Number,
             keyConcepts: String,
