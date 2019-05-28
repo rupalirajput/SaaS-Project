@@ -159,6 +159,7 @@ var App = /** @class */ (function () {
             _this.Questions.deleteQuestion(res, { questionID: id });
         });
         // TESTS
+        // get API for retrieving all tests
         router.get('/tests/', function (req, res) {
             console.log('Query All tests');
             _this.Tests.retrieveAllTests(res);
@@ -168,6 +169,12 @@ var App = /** @class */ (function () {
             var id = req.params.testid;
             console.log('Query single test with id: ' + id);
             _this.Tests.retrieveOneTest(res, { testID: id });
+        });
+        // get API for retriving first question for a test
+        router.get('/test/:questionBankID', function (req, res) {
+            var id = req.params.questionBankID;
+            console.log('Query single question with question bank id: ' + id);
+            _this.Tests.retrieveRandomQuestion(res, id);
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));

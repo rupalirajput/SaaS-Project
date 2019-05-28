@@ -252,16 +252,24 @@ class App {
 
   // TESTS
 
+  // get API for retrieving all tests
   router.get('/tests/', (req, res) => {
       console.log('Query All tests');
       this.Tests.retrieveAllTests(res);
   });
 
-    // get API for retriving single account by userid
+  // get API for retriving single account by userid
   router.get('/tests/:testid', (req, res) => {
       var id = req.params.testid;
       console.log('Query single test with id: ' + id);
       this.Tests.retrieveOneTest(res, {testID: id});
+  });
+
+  // get API for retriving first question for a test
+  router.get('/test/:questionBankID', (req, res) => {
+      var id = req.params.questionBankID;
+      console.log('Query single question with question bank id: ' + id);
+      this.Tests.retrieveRandomQuestion(res, id);
   });
 
 
