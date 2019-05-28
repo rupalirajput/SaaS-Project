@@ -64,6 +64,9 @@ questionBanksCollection.insert(
   {
     quesBankID : 101,
     quesBankName : "Mathematics",
+		duration: 60,
+		numberOfQuestions: 5,
+		keyConcepts: "Addition Subtraction",
     status : "Published",
     createdDate : "05/07/2019",
     lastmodifiedDate : "05/08/2019",
@@ -76,6 +79,9 @@ questionBanksCollection.insert(
   {
     quesBankID : 102,
     quesBankName : "Physics",
+		duration: 60,
+		numberOfQuestions: 6,
+		keyConcepts: "Speed Direction Velocity",
     status : "Not Published",
     createdDate : "04/07/2019",
     lastmodifiedDate : "04/08/2019",

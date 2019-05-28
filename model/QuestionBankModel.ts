@@ -19,6 +19,9 @@ class QuestionBankModel {
             {
                 quesBankID: Number,
                 quesBankName: String,
+                duration: Number,
+                numberOfQuestions: Number,
+                keyConcepts: String,
                 status: String,
                 createdDate: Date,
                 lastmodifiedDate: Date,
@@ -46,12 +49,12 @@ class QuestionBankModel {
             response.json(itemArray);
         });
 
-    } 
+    }
 
     public deleteQuestionBank(response:any, filter:Object) {
         this.model.remove(filter);
         response.json(filter)
-    } 
+    }
 
 }
 export {QuestionBankModel};
