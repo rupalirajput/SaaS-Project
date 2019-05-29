@@ -1,6 +1,6 @@
 import Mongoose = require("mongoose");
 
-interface IReportModel{
+interface IReportModel extends Mongoose.Document{
     reportid: Number;
     userid: Number;
     questionBankID: Number;

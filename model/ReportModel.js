@@ -16,7 +16,10 @@ var ReportModel = /** @class */ (function () {
             questionBankID: Number,
             score: Number,
             strengths: String,
-            weaknesses: String
+            weaknesses: String,
+            categories: [],
+            scores: [],
+            title: String
         });
     };
     ReportModel.prototype.createModel = function () {

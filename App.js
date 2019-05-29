@@ -72,11 +72,11 @@ var App = /** @class */ (function () {
             _this.Reports.retrieveAllReportDetails(res, { userid: id });
         });
         // get API for getting a single report
-        router.get('/report/:userid/reports/:reportid', function (req, res) {
+        router.get('/report/:userid/reports/:questionBankID', function (req, res) {
             var id = req.params.userid;
-            var reportid = req.params.reportid;
-            console.log("Query a single report from a single user with user id:" + id + " and report id: " + reportid);
-            _this.Reports.retrieveSingleReportDetails(res, { userid: id, reportid: reportid });
+            var questionBankID = req.params.questionBankID;
+            console.log("Query a single report from a single user with user id:" + id + " and questionBankID id: " + questionBankID);
+            _this.Reports.retrieveSingleReportDetails(res, { userid: id, questionBankID: questionBankID });
         });
         // QUESTION BANKS
         // retrive all questionBanks
