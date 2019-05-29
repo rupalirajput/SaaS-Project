@@ -22,7 +22,12 @@ class ReportModel {
                 quesBankID: Number,
                 score: Number,
                 strengths: String,
-                weaknesses: String
+                weaknesses: String,
+                categories: [],
+                scores:[],
+                title: String
+
+
             },
         );
     }

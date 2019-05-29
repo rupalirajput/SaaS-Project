@@ -40,7 +40,11 @@ reportCollection.insert(
     quesBankID : 101,
     score : 87,
     strengths : "Slopes of lines",
-    weaknesses : "Horizontal and Vertical Lines"
+		weaknesses : "Horizontal and Vertical Lines",
+		categories: ["Slopes of Lines", "Equations of Lines",
+		"Horizontal and Vertical Lines", "Tangent Lines" ],
+		scores: [19, 17, 3, 5],
+		title: "PreCalculus Chapter 1-4"
   }
 )
 
