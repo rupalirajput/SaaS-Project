@@ -62,8 +62,8 @@ questionBanksCollection = db.getCollection("questionBanks")
 questionBanksCollection.remove({})
 questionBanksCollection.insert(
       {
-            quesBankID: 101,
-            quesBankName: "Mathematics",
+            questionBankID: 101,
+            questionBankName: "Mathematics",
             status: "Published",
             createdDate: "05/07/2019",
             lastmodifiedDate: "05/08/2019",
@@ -77,8 +77,8 @@ questionBanksCollection.insert(
 )
 questionBanksCollection.insert(
       {
-            quesBankID: 102,
-            quesBankName: "Physics",
+            questionBankID: 102,
+            questionBankName: "Physics",
             status: "Not Published",
             createdDate: "04/07/2019",
             lastmodifiedDate: "04/08/2019",

@@ -175,7 +175,6 @@ var App = /** @class */ (function () {
         // get API for retriving first question for a test
         router.get('/test/:questionBankID', function (req, res) {
             var id = req.params.questionBankID;
-            id = +id;
             console.log('Query single question with question bank id: ' + id);
             _this.Tests.retrieveRandomQuestion(res, id);
         });
