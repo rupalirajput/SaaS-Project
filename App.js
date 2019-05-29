@@ -17,6 +17,7 @@ var App = /** @class */ (function () {
         this.middleware();
         this.routes();
         this.idGenerator = 200;
+        this.questionIdGenerator = 1001;
         this.Accounts = new AccountModel_1.AccountModel();
         this.Reports = new ReportModel_1.ReportModel();
         this.QuestionBanks = new QuestionBankModel_1.QuestionBankModel();
@@ -35,6 +36,7 @@ var App = /** @class */ (function () {
         var router = express.Router();
         router.use(function (req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
@@ -143,19 +145,19 @@ var App = /** @class */ (function () {
             console.log(req.body);
             var jsonObj = req.body;
             var id = req.params.questionBankID;
-            jsonObj.questionID = _this.idGenerator;
+            jsonObj.questionID = _this.questionIdGenerator;
             _this.Questions.model.create([jsonObj], { questionBankID: id }, function (err) {
                 if (err) {
                     console.log('object creation failed');
                 }
             });
-            res.send(_this.idGenerator.toString());
-            _this.idGenerator++;
+            res.send(_this.questionIdGenerator.toString());
+            _this.questionIdGenerator++;
         });
         // delete question
         router["delete"]('/questions/:questionID/', function (req, res) {
             var id = req.params.questionID;
-            console.log('Delete QuestionBank with id: ' + id);
+            console.log('Delete Question with id: ' + id);
             _this.Questions.deleteQuestion(res, { questionID: id });
         });
         // TESTS

@@ -31,6 +31,7 @@ class App {
     this.middleware();
     this.routes();
     this.idGenerator = 200;
+    this.questionIdGenerator = 1001;
     this.Accounts = new AccountModel();
     this.Reports = new ReportModel();
     this.QuestionBanks = new QuestionBankModel();
@@ -51,6 +52,7 @@ class App {
 
     router.use( (req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     });
@@ -231,20 +233,20 @@ class App {
       console.log(req.body);
       var jsonObj = req.body;
       var id = req.params.questionBankID;
-      jsonObj.questionID = this.idGenerator;
+      jsonObj.questionID = this.questionIdGenerator;
       this.Questions.model.create([jsonObj], {questionBankID: id}, (err) => {
           if (err) {
               console.log('object creation failed');
           }
       });
-      res.send(this.idGenerator.toString());
-      this.idGenerator++;
+      res.send(this.questionIdGenerator.toString());
+      this.questionIdGenerator++;
   });
 
   // delete question
   router.delete('/questions/:questionID/', (req, res) => {
     var id = req.params.questionID;
-    console.log('Delete QuestionBank with id: ' + id);
+    console.log('Delete Question with id: ' + id);
     this.Questions.deleteQuestion(res, {questionID: id});
   });
 
