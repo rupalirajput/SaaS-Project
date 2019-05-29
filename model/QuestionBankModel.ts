@@ -17,13 +17,16 @@ class QuestionBankModel {
     public createSchema(): void {
         this.schema = new Mongoose.Schema(
             {
-                quesBankID: Number,
-                quesBankName: String,
+                questionBankID: Number,
+                questionBankName: String,
+                duration: Number,
+                numberOfQuestions: Number,
+                keyConcepts: String,
                 status: String,
                 createdDate: Date,
                 lastmodifiedDate: Date,
                 createdBy: String,
-                updatedBy: String,
+                updatedBy: String
             }, {collection: 'questionBanks'}
         );
     }
@@ -46,12 +49,12 @@ class QuestionBankModel {
             response.json(itemArray);
         });
 
-    } 
+    }
 
     public deleteQuestionBank(response:any, filter:Object) {
         this.model.remove(filter);
         response.json(filter)
-    } 
+    }
 
 }
 export {QuestionBankModel};

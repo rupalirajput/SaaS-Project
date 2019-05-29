@@ -13,7 +13,7 @@ var ReportModel = /** @class */ (function () {
         this.schema = new Mongoose.Schema({
             reportid: Number,
             userid: Number,
-            quesBankID: Number,
+            questionBankID: Number,
             score: Number,
             strengths: String,
             weaknesses: String

@@ -37,7 +37,7 @@ reportCollection.insert(
 	{
     reportid : 1,
     userid : 1,
-    quesBankID : 101,
+    questionBankID : 101,
     score : 87,
     strengths : "Slopes of lines",
 		weaknesses : "Horizontal and Vertical Lines",
@@ -52,7 +52,7 @@ reportCollection.insert(
 	{
     reportid :2,
     userid: 1,
-    quesBankID : 102,
+    questionBankID : 102,
     score : 65,
     strengths : "Newton's Laws of Motion",
     weaknesses : "Fluid Dynamics"
@@ -65,27 +65,34 @@ db.createCollection('questionBanks')
 questionBanksCollection = db.getCollection("questionBanks")
 questionBanksCollection.remove({})
 questionBanksCollection.insert(
-  {
-    quesBankID : 101,
-    quesBankName : "Mathematics",
-    status : "Published",
-    createdDate : "05/07/2019",
-    lastmodifiedDate : "05/08/2019",
-    createdBy : "Prof. A",
-    updatedBy : "Prof. H"
-  }
-)
+      {
+            questionBankID: 101,
+            questionBankName: "Mathematics",
+            status: "Published",
+            createdDate: "05/07/2019",
+            lastmodifiedDate: "05/08/2019",
+            createdBy: "Prof. A",
+            updatedBy: "Prof. H",
+            keyConcepts: "Precalculas I",
+            numberOfQuestions: 50,
+            duration: 60
 
+      }
+)
 questionBanksCollection.insert(
-  {
-    quesBankID : 102,
-    quesBankName : "Physics",
-    status : "Not Published",
-    createdDate : "04/07/2019",
-    lastmodifiedDate : "04/08/2019",
-    createdBy : "Prof. H",
-    updatedBy : "Prof. H"
-  }
+      {
+            questionBankID: 102,
+            questionBankName: "Physics",
+            status: "Not Published",
+            createdDate: "04/07/2019",
+            lastmodifiedDate: "04/08/2019",
+            createdBy: "Prof. H",
+            updatedBy: "Prof. H",
+            keyConcepts: "Physics I",
+            numberOfQuestions: 50,
+            duration: 60
+
+      }
 )
 // END: Question Banks
 
@@ -96,6 +103,7 @@ questionsCollection.remove({})
 questionsCollection.insert(
   {
     questionBankID : 101,
+		questionBankName : "Mathematics",
     questionID : 1011,
     questionText : "What is the square of 12?",
     category : "Mathematics",
@@ -106,13 +114,14 @@ questionsCollection.insert(
 				"12",
 				"144"
 			],
-    answer : "144"
+    answer : "4"
 	}
 )
 
 questionsCollection.insert(
   {
 		questionBankID : 101,
+		questionBankName : "Mathematics",
     questionID : 1012,
     questionText : "What is the squareroot of 169?",
     category : "Mathematics",
@@ -123,12 +132,13 @@ questionsCollection.insert(
 				"11",
 				"14"
 			],
-    answer : "13"
+    answer : "2"
 	}
 )
 questionsCollection.insert(
   {
     questionBankID : 102,
+		questionBankName : "Physics",
     questionID : 1021,
     questionText : "Which of below has both magnitude and direction?",
     category : "Physics",
@@ -139,13 +149,14 @@ questionsCollection.insert(
 				"displacement",
 				"speed"
 			],
-    answer: "vector"
+    answer: "2"
 	}
 )
 
 questionsCollection.insert(
   {
 		questionBankID : 102,
+		questionBankName : "Physics",
     questionID : 1022,
     questionText : "What is the formula to calculate speed?",
     category : "Physics",
@@ -156,7 +167,7 @@ questionsCollection.insert(
 				"speed = time/distance",
 				"None of the above"
 			],
-    answer : "speed = distance/time"
+    answer : "1"
   }
 )
 // END: Questions

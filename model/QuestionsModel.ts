@@ -18,6 +18,7 @@ class QuestionsModel {
     this.schema = new Mongoose.Schema(
       {
         questionBankID: Number,
+        questionBankName: String,
         questionID: Number,
         questionText: String,
         category: String,
@@ -46,15 +47,45 @@ class QuestionsModel {
   }
 
   public retrieveQuestionsDetails(response:any, filter:Object) {
-    var query = this.model.findOne(filter);
+    var query = this.model.find(filter);
     query.exec( (err, itemArray) => {
-      response.json(itemArray);
+      if (!err)
+      {
+        response.json(itemArray) ;
+      }
+      else
+      {
+        console.log(err);
+      }
+    });
+  }
+
+  public retrieveQuestionByID(response:any, filter:Object) {
+    var query = this.model.find(filter);
+    query.exec( (err, itemArray) => {
+      if (!err)
+      {
+        response.json(itemArray) ;
+      }
+      else
+      {
+        console.log(err);
+      }
     });
   }
 
   public deleteQuestion(response:any, filter:Object) {
-    this.model.remove(filter);
-    response.json(filter)
+      var query = this.model.findOneAndRemove(filter);
+      query.exec( (err, itemArray) => {
+      if (!err)
+      {
+        response.json(itemArray) ;
+      }
+      else
+      {
+        console.log(err);
+      }
+    });
   }
 }
 
