@@ -12,6 +12,7 @@ var QuestionsModel = /** @class */ (function () {
     QuestionsModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
             questionBankID: Number,
+            questionBankName: String,
             questionID: Number,
             questionText: String,
             category: String,

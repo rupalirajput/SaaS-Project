@@ -99,6 +99,7 @@ questionsCollection.remove({})
 questionsCollection.insert(
   {
     questionBankID : 101,
+		questionBankName : "Mathematics",
     questionID : 1011,
     questionText : "What is the square of 12?",
     category : "Mathematics",
@@ -116,6 +117,7 @@ questionsCollection.insert(
 questionsCollection.insert(
   {
 		questionBankID : 101,
+		questionBankName : "Mathematics",
     questionID : 1012,
     questionText : "What is the squareroot of 169?",
     category : "Mathematics",
@@ -132,6 +134,7 @@ questionsCollection.insert(
 questionsCollection.insert(
   {
     questionBankID : 102,
+		questionBankName : "Physics",
     questionID : 1021,
     questionText : "Which of below has both magnitude and direction?",
     category : "Physics",
@@ -149,6 +152,7 @@ questionsCollection.insert(
 questionsCollection.insert(
   {
 		questionBankID : 102,
+		questionBankName : "Physics",
     questionID : 1022,
     questionText : "What is the formula to calculate speed?",
     category : "Physics",
