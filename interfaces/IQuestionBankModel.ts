@@ -11,5 +11,8 @@ interface IQuestionBankModel extends Mongoose.Document {
     lastmodifiedDate: Date;
     createdBy: String;
     updatedBy: String;
+	description: String;
+    noOfQues: Number;
+    duration: Number;
 }
 export {IQuestionBankModel};

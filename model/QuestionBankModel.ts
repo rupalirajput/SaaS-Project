@@ -27,6 +27,9 @@ class QuestionBankModel {
                 lastmodifiedDate: Date,
                 createdBy: String,
                 updatedBy: String,
+				description: String,
+				noOfQues: Number,
+				duration: Number
             }, {collection: 'questionBanks'}
         );
     }

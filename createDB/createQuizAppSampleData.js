@@ -61,33 +61,34 @@ db.createCollection('questionBanks')
 questionBanksCollection = db.getCollection("questionBanks")
 questionBanksCollection.remove({})
 questionBanksCollection.insert(
-  {
-    questionBankID : 101,
-    questionBankName : "Mathematics",
-		duration: 60,
-		numberOfQuestions: 5,
-		keyConcepts: "Addition Subtraction",
-    status : "Published",
-    createdDate : "05/07/2019",
-    lastmodifiedDate : "05/08/2019",
-    createdBy : "Prof. A",
-    updatedBy : "Prof. H"
-  }
-)
+      {
+            quesBankID: 101,
+            quesBankName: "Mathematics",
+            status: "Published",
+            createdDate: "05/07/2019",
+            lastmodifiedDate: "05/08/2019",
+            createdBy: "Prof. A",
+            updatedBy: "Prof. H",
+            description: "Precalculas I",
+            noOfQues: 50,
+            duration: 60
 
+      }
+)
 questionBanksCollection.insert(
-  {
-    questionBankID : 102,
-    questionBankName : "Physics",
-		duration: 60,
-		numberOfQuestions: 6,
-		keyConcepts: "Speed Direction Velocity",
-    status : "Not Published",
-    createdDate : "04/07/2019",
-    lastmodifiedDate : "04/08/2019",
-    createdBy : "Prof. H",
-    updatedBy : "Prof. H"
-  }
+      {
+            quesBankID: 102,
+            quesBankName: "Physics",
+            status: "Not Published",
+            createdDate: "04/07/2019",
+            lastmodifiedDate: "04/08/2019",
+            createdBy: "Prof. H",
+            updatedBy: "Prof. H",
+            description: "Physics I",
+            noOfQues: 50,
+            duration: 60
+
+      }
 )
 // END: Question Banks
 
