@@ -69,8 +69,8 @@ questionBanksCollection.insert(
             lastmodifiedDate: "05/08/2019",
             createdBy: "Prof. A",
             updatedBy: "Prof. H",
-            description: "Precalculas I",
-            noOfQues: 50,
+            keyConcepts: "Precalculas I",
+            numberOfQuestions: 50,
             duration: 60
 
       }
@@ -84,8 +84,8 @@ questionBanksCollection.insert(
             lastmodifiedDate: "04/08/2019",
             createdBy: "Prof. H",
             updatedBy: "Prof. H",
-            description: "Physics I",
-            noOfQues: 50,
+            keyConcepts: "Physics I",
+            numberOfQuestions: 50,
             duration: 60
 
       }

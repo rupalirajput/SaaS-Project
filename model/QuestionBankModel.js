@@ -20,10 +20,7 @@ var QuestionBankModel = /** @class */ (function () {
             createdDate: Date,
             lastmodifiedDate: Date,
             createdBy: String,
-            updatedBy: String,
-			description: String,
-            noOfQues: Number,
-            duration: Number
+            updatedBy: String
         }, { collection: 'questionBanks' });
     };
     QuestionBankModel.prototype.createModel = function () {

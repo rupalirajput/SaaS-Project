@@ -26,10 +26,7 @@ class QuestionBankModel {
                 createdDate: Date,
                 lastmodifiedDate: Date,
                 createdBy: String,
-                updatedBy: String,
-				description: String,
-				noOfQues: Number,
-				duration: Number
+                updatedBy: String
             }, {collection: 'questionBanks'}
         );
     }
