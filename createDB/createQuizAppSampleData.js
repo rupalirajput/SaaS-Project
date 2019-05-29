@@ -52,7 +52,7 @@ reportCollection.insert(
 	{
     reportid :2,
     userid: 1,
-    quesBankID : 102,
+    questionBankID : 102,
     score : 65,
     strengths : "Newton's Laws of Motion",
 		weaknesses : "Fluid Dynamics",
