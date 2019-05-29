@@ -52,10 +52,14 @@ reportCollection.insert(
 	{
     reportid :2,
     userid: 1,
-    questionBankID : 102,
+    quesBankID : 102,
     score : 65,
     strengths : "Newton's Laws of Motion",
-    weaknesses : "Fluid Dynamics"
+		weaknesses : "Fluid Dynamics",
+		categories: ["Newton's Laws of Motion",
+		"Fluid Dynamics", "Circular Motion", "One Dimensional Kinematics"],
+		scores: [20, 2, 10, 13],
+		title: "Physics Chapters 1-6"
   }
 )
 // END: Reports
