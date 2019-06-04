@@ -1,0 +1,23 @@
+[ 
+	 {
+	   "username": "ABC",
+      "password": "1234",
+      "userid": 1,
+	    "firstName": "ABC",
+      "lastName": "XYZ",
+      "email": "abc@gmail.com",
+      "role": "student"
+
+	 },
+	 {
+	  "username": "PQR",
+      "password": "&*(",
+      "userid": 2,
+	    "firstName": "ABC",
+      "lastName": "XYZ",
+      "email": "abc@gmail.com",
+      "role": "student"
+
+
+	 }
+]
