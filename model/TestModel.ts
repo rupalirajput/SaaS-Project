@@ -71,8 +71,9 @@ class TestModel {
     }
 
     // Gets all test records with one TestID
-    public retrieveRandomQuestion(response:any, id: Number) {
-      var query = this.questionModel.find({questionBankID: id}).sort({questionID: 'desc'});
+    public retrieveRandomQuestion(response:any, id: any) {
+      var query = this.questionModel.find({questionBankID: Number(id)}).sort({questionID: 'desc'});
+      console.log(typeof(id))
       query.exec( (err, itemArray) => {
           if (!err) {
             let randomQuestionNumber = Math.floor((Math.random() * itemArray.length));

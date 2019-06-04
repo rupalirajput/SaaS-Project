@@ -62,7 +62,8 @@ var TestModel = /** @class */ (function () {
     };
     // Gets all test records with one TestID
     TestModel.prototype.retrieveRandomQuestion = function (response, id) {
-        var query = this.questionModel.find({ questionBankID: id }).sort({ questionID: 'desc' });
+        var query = this.questionModel.find({ questionBankID: Number(id) }).sort({ questionID: 'desc' });
+        console.log(typeof (id));
         query.exec(function (err, itemArray) {
             if (!err) {
                 var randomQuestionNumber = Math.floor((Math.random() * itemArray.length));
