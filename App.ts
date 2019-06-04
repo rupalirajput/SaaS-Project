@@ -302,6 +302,7 @@ class App {
     this.expressApp.use('/img', express.static(path.join(__dirname, '/img')))
     this.expressApp.use('/js', express.static(path.join(__dirname, '/js')));
     this.expressApp.use('/', express.static(path.join(__dirname, '/pages')));
+    this.expressApp.use('/', express.static(__dirname+'/angularDist'));
 
   }
 

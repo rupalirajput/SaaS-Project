@@ -7,6 +7,6 @@ import * as bodyParser from 'body-parser';
 import {App} from './App';
 
 let server: any = new App().expressApp;
-server.listen(1234, () => {
+server.listen(process.env.PORT || 1234, () => {
     console.log('Express server listening on port 1234');
 });
