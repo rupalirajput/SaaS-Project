@@ -289,6 +289,15 @@ class App {
     this.idGenerator++;
   });
   */
+  // get info to be displayed in report
+  router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
+    var testTakerID = req.params.testTakerID;
+    var questionBankID = req.params.questionBankID;
+    var testID = req.params.testID;
+    console.log('Query single test results');
+    this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
+    questionBankID: questionBankID, testID: testID});
+  });
 
 
 

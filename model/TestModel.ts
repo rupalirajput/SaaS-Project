@@ -20,7 +20,7 @@ class TestModel {
             {
               testID : Number,
               questionBankCreatorID : Number,
-              testTakeerID : Number,
+              testTakerID : Number,
               questionBankID : Number,
               questionID : Number,
               orderOfQuestionInTest : Number,
@@ -80,6 +80,20 @@ class TestModel {
             console.log(itemArray);
             response.json(itemArray[randomQuestionNumber]);
           } else {
+            console.log(err);
+          };
+      });
+    }
+
+    // Gets test results to be used in reports
+    public getSingleReportInfo(response:any, filter:Object) {
+      var query = this.model.find(filter);
+      query.exec( (err, itemArray) => {
+          if (!err) {
+              response.json(itemArray);
+              console.log('single report working')
+          } else {
+            console.log('error in express');  
             console.log(err);
           };
       });

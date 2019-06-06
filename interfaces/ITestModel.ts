@@ -3,7 +3,7 @@ import Mongoose = require("mongoose");
 interface ITestModel extends Mongoose.Document {
   testID : Number;
   questionBankCreatorID : Number;
-  testTakeerID : Number;
+  testTakerID : Number;
   questionBankID : Number;
   questionID : Number;
   orderOfQuestionInTest : Number;
