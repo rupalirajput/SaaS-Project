@@ -310,4 +310,43 @@ testCollection.insert(
 		isCorrect : 1
 	}
 )
+
+testCollection.insert(
+	{
+		testID : 3,
+		questionBankCreatorID : 1,
+		testTakerID : 2,
+		questionBankID : 101,
+		questionID : 1021,
+	 	orderOfQuestionInTest : 1,
+		category : "Inheritance",
+		isCorrect : 1
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 3,
+		questionBankCreatorID : 1,
+		testTakerID : 2,
+		questionBankID : 102,
+		questionID : 1021,
+	 	orderOfQuestionInTest : 1,
+		category : "Genetics",
+		isCorrect : 0
+	}
+)
+
+testCollection.insert(
+	{
+		testID : 3,
+		questionBankCreatorID : 1,
+		testTakerID : 2,
+		questionBankID : 102,
+		questionID : 1021,
+	 	orderOfQuestionInTest : 1,
+		category : "Mitosis",
+		isCorrect : 1
+	}
+)
 // END: Test

@@ -86,19 +86,36 @@ class TestModel {
     }
 
     // Gets test results to be used in reports
-    public getSingleReportInfo(response:any, filter:Object) {
-      var query = this.model.find(filter);
-      query.exec( (err, itemArray) => {
-          if (!err) {
-              response.json(itemArray);
-              console.log('single report working')
-          } else {
-            console.log('error in express');  
-            console.log(err);
-          };
-      });
-    }
+    public getSingleReportInfo(response:any, testTakerID:Number,
+      questionBankID:Number ) {
+      console.log('getting single report info');
+      var query = this.model.findOne({testTakerID: testTakerID,
+      questionBankID:questionBankID}).sort('-testID');
+      var newestTestID;
 
+      query.exec( (err, itemArray) => {
+        if (!err) {
+          console.log('entered query');
+          newestTestID = itemArray.testID;
+            
+          var query2 = this.model.find({testID: newestTestID,
+          testTakerID: testTakerID,
+          questionBankID:questionBankID});
+          
+          query2.exec((err, itemArray) => {
+            if (!err) {
+              response.json(itemArray);
+            }
+            else {
+              console.log(err);
+            };
+          });
+        } else {
+          console.log('error in express');  
+          console.log(err);
+          };
+      }); 
+    }
     // Posts a record in Test collection given testID and questionID
     // Is called when user submits and answer to a question
     // Will contain data:

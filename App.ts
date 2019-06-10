@@ -102,13 +102,13 @@ class App {
         this.Reports.retrieveAllReportDetails(res, {userid: id});
     });
 
-      // get API for getting a single report
+     /* // get API for getting a single report
     router.get('/report/:userid/reports/:questionBankID', (req, res) => {
         var id = req.params.userid;
         var questionBankID = req.params.questionBankID;
         console.log("Query a single report from a single user with user id:" + id + " and questionBankID id: " + questionBankID);
         this.Reports.retrieveSingleReportDetails(res, {userid: id, questionBankID: questionBankID});
-    });
+    });*/
 
 
 
@@ -289,6 +289,7 @@ class App {
     this.idGenerator++;
   });
   */
+  /*
   // get info to be displayed in report
   router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
     var testTakerID = req.params.testTakerID;
@@ -297,7 +298,27 @@ class App {
     console.log('Query single test results');
     this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
     questionBankID: questionBankID, testID: testID});
+  });*/
+  router.get('/report/:testTakerID/reports/:questionBankID', (req, res) => {
+  var testTakerID = req.params.testTakerID;
+  var questionBankID = req.params.questionBankID;
+  
+  console.log('get newest test num');
+  this.Tests.getSingleReportInfo(res, testTakerID,
+  questionBankID);
+  
   });
+
+  /*router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
+    var testTakerID = req.params.testTakerID;
+    var questionBankID = req.params.questionBankID;
+    var testID = req.params.testID;
+    console.log('get latest test results info');
+    this.Tests.getReportInfo(res, {testTakerID: testTakerID,
+    questionBankID: questionBankID, testID:testID});
+    
+  });*/
+
 
 
 
