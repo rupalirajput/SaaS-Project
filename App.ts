@@ -299,11 +299,11 @@ class App {
   });
 
   // get API for retriving first question for a test
-  router.get('/test/:questionBankID/:orderOfQuestionInTest', (req, res) => {
+  router.get('/test/:questionBankID/', (req, res) => {
       var id = req.params.questionBankID;
       var order = req.params.orderOfQuestionInTest;
       console.log('Query single question with question bank id: ' + id);
-      this.Tests.retrieveRandomQuestion(res, id, order);
+      this.Tests.retrieveRandomQuestion(res, id);
   });
 
   // get API for retriving 2nd -> end questions on a test
@@ -312,7 +312,7 @@ class App {
       var order = req.params.orderOfQuestionInTest;
       var testID = req.params.testID;
       console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
-      this.Tests.retrieveRandomQuestion(res, id, order, testID);
+      this.Tests.retrieveNextQuestion(res, id, order, testID);
   });
 
   // post API for submitting a question in a test
