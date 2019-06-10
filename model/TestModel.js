@@ -90,6 +90,7 @@ var TestModel = /** @class */ (function () {
                 queryAllQuestions.exec(function (err, question) {
                     if (!err) {
                         console.log("Next question: ", question);
+                        response.json(question);
                     }
                     else {
                         console.log(err);
