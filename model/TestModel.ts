@@ -85,8 +85,28 @@ class TestModel {
     }
 
     // Gets question questions 2 -> end of test
-    public retrieveNextQuestion(response: any, id: any, testID: any){
-      
+    public retrieveNextQuestion(response: any, id: any, order: any, testid: any){
+      var queryAnsweredQuestions = this.model.find({testID: testid}).select('questionID');
+      queryAnsweredQuestions.exec( (err, resultArray) => {
+        if (!err){
+          var answeredQuestions: Number[] = new Array();
+          var i:any;
+          for (i=0; i < resultArray.length; i++){
+            answeredQuestions.push(resultArray[i]['questionID']);
+          }
+          var queryAllQuestions = this.questionModel.findOne({questionBankID: id, questionID: {"$nin": answeredQuestions}});
+          queryAllQuestions.exec( (err, question) => {
+            if (!err){
+              console.log("Next question: ", question);
+              response.json(question);
+            } else{
+              console.log(err);
+            }
+          });
+        } else{
+          console.log(err);
+        }
+      });
     }
 
     // Gets test results to be used in reports

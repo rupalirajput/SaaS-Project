@@ -191,10 +191,19 @@ var App = /** @class */ (function () {
             _this.Tests.retrieveOneTest(res, { testID: id });
         });
         // get API for retriving first question for a test
-        router.get('/test/:questionBankID', function (req, res) {
+        router.get('/test/:questionBankID/', function (req, res) {
             var id = req.params.questionBankID;
+            var order = req.params.orderOfQuestionInTest;
             console.log('Query single question with question bank id: ' + id);
             _this.Tests.retrieveRandomQuestion(res, id);
+        });
+        // get API for retriving 2nd -> end questions on a test
+        router.get('/test/:questionBankID/:orderOfQuestionInTest/:testID', function (req, res) {
+            var id = req.params.questionBankID;
+            var order = req.params.orderOfQuestionInTest;
+            var testID = req.params.testID;
+            console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
+            _this.Tests.retrieveNextQuestion(res, id, order, testID);
         });
         // post API for submitting a question in a test
         router.post('/test/:questionBankID', function (req, res) {

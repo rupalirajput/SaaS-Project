@@ -60,10 +60,9 @@ var TestModel = /** @class */ (function () {
             ;
         });
     };
-    // Gets all test records with one TestID
+    // Gets random question as the first question on a test
     TestModel.prototype.retrieveRandomQuestion = function (response, id) {
         var query = this.questionModel.find({ questionBankID: Number(id) }).sort({ questionID: 'desc' });
-        console.log(typeof (id));
         query.exec(function (err, itemArray) {
             if (!err) {
                 var randomQuestionNumber = Math.floor((Math.random() * itemArray.length));
@@ -74,6 +73,32 @@ var TestModel = /** @class */ (function () {
                 console.log(err);
             }
             ;
+        });
+    };
+    // Gets question questions 2 -> end of test
+    TestModel.prototype.retrieveNextQuestion = function (response, id, order, testid) {
+        var _this = this;
+        var queryAnsweredQuestions = this.model.find({ testID: testid }).select('questionID');
+        queryAnsweredQuestions.exec(function (err, resultArray) {
+            if (!err) {
+                var answeredQuestions = new Array();
+                var i;
+                for (i = 0; i < resultArray.length; i++) {
+                    answeredQuestions.push(resultArray[i]['questionID']);
+                }
+                var queryAllQuestions = _this.questionModel.findOne({ questionBankID: id, questionID: { "$nin": answeredQuestions } });
+                queryAllQuestions.exec(function (err, question) {
+                    if (!err) {
+                        console.log("Next question: ", question);
+                    }
+                    else {
+                        console.log(err);
+                    }
+                });
+            }
+            else {
+                console.log(err);
+            }
         });
     };
     // Gets test results to be used in reports
