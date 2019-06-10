@@ -89,6 +89,12 @@ class App {
         )
     );
 
+      router.get('/auth/google/logout',
+          passport.authenticate('google',
+              { successRedirect: '/#/', failureRedirect: '/'
+              }
+          )
+      );
 
     // ACCOUNTS
 

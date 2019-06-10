@@ -59,6 +59,8 @@ var App = /** @class */ (function () {
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
         router.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/#/', failureRedirect: '/'
         }));
+        router.get('/auth/google/logout', passport.authenticate('google', { successRedirect: '/#/', failureRedirect: '/'
+        }));
         // ACCOUNTS
         router.get('/account/', this.validateAuth, function (req, res) {
             console.log('Query All account');
