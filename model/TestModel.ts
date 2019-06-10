@@ -118,10 +118,10 @@ class TestModel {
       var newestTestID;
 
       query.exec( (err, itemArray) => {
-        if (!err) {
-          console.log('entered query');
+        if (!err && itemArray != null) {
+          
           newestTestID = itemArray.testID;
-
+          
           var query2 = this.model.find({testID: newestTestID,
           testTakerID: testTakerID,
           questionBankID:questionBankID});
@@ -134,8 +134,10 @@ class TestModel {
               console.log(err);
             };
           });
+          
         } else {
-          console.log('error in express');
+          if (itemArray == null)
+            console.log('no test results data');
           console.log(err);
           };
       });
