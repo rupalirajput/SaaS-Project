@@ -19,7 +19,6 @@ class TestModel {
         this.schema = new Mongoose.Schema(
             {
               testID : Number,
-              questionBankCreatorID : Number,
               testTakerID : Number,
               questionBankID : Number,
               questionID : Number,
@@ -119,9 +118,9 @@ class TestModel {
 
       query.exec( (err, itemArray) => {
         if (!err && itemArray != null) {
-          
+
           newestTestID = itemArray.testID;
-          
+
           var query2 = this.model.find({testID: newestTestID,
           testTakerID: testTakerID,
           questionBankID:questionBankID});
@@ -134,7 +133,7 @@ class TestModel {
               console.log(err);
             };
           });
-          
+
         } else {
           if (itemArray == null)
             console.log('no test results data');
