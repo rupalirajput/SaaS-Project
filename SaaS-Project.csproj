@@ -429,6 +429,10 @@
     <None Include="angularDist\assets\json\accounts\1.json" />
     <None Include="angularDist\assets\json\accounts\2.json" />
     <None Include="angularDist\assets\json\reports\1.json" />
+    <None Include="googleOauth2.ts" />
+    <None Include="googleOauth2.js" />
+    <None Include="GooglePassport.ts" />
+    <None Include="GooglePassport.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

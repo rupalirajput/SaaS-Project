@@ -118,7 +118,7 @@ questionsCollection.insert(
 				"12",
 				"144"
 			],
-    answer : "4"
+    answer : "144"
 	}
 )
 
@@ -136,7 +136,7 @@ questionsCollection.insert(
 				"11",
 				"14"
 			],
-    answer : "2"
+    answer : "13"
 	}
 )
 questionsCollection.insert(
@@ -153,7 +153,7 @@ questionsCollection.insert(
 				"displacement",
 				"speed"
 			],
-    answer: "2"
+    answer: "vector"
 	}
 )
 
@@ -171,7 +171,7 @@ questionsCollection.insert(
 				"speed = time/distance",
 				"None of the above"
 			],
-    answer : "1"
+    answer : "speed = distance/time"
   }
 )
 // END: Questions
@@ -184,7 +184,6 @@ testCollection.remove({})
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 1011,
@@ -197,7 +196,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 1015,
@@ -210,7 +208,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 10120,
@@ -223,7 +220,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 1017,
@@ -236,7 +232,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 10115,
@@ -249,7 +244,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 10110,
@@ -262,7 +256,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 10150,
@@ -275,7 +268,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 1013,
@@ -288,7 +280,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 1,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 101,
 		questionID : 10133,
@@ -301,7 +292,6 @@ testCollection.insert(
 testCollection.insert(
 	{
 		testID : 2,
-		questionBankCreatorID : 1,
 		testTakerID : 2,
 		questionBankID : 102,
 		questionID : 1021,
