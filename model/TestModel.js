@@ -103,12 +103,28 @@ var TestModel = /** @class */ (function () {
         });
     };
     // Gets test results to be used in reports
-    TestModel.prototype.getSingleReportInfo = function (response, filter) {
-        var query = this.model.find(filter);
+    TestModel.prototype.getSingleReportInfo = function (response, testTakerID, questionBankID) {
+        var _this = this;
+        console.log('getting single report info');
+        var query = this.model.findOne({ testTakerID: testTakerID,
+            questionBankID: questionBankID }).sort('-testID');
+        var newestTestID;
         query.exec(function (err, itemArray) {
             if (!err) {
-                response.json(itemArray);
-                console.log('single report working');
+                console.log('entered query');
+                newestTestID = itemArray.testID;
+                var query2 = _this.model.find({ testID: newestTestID,
+                    testTakerID: testTakerID,
+                    questionBankID: questionBankID });
+                query2.exec(function (err, itemArray) {
+                    if (!err) {
+                        response.json(itemArray);
+                    }
+                    else {
+                        console.log(err);
+                    }
+                    ;
+                });
             }
             else {
                 console.log('error in express');

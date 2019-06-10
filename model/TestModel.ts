@@ -121,11 +121,11 @@ class TestModel {
         if (!err) {
           console.log('entered query');
           newestTestID = itemArray.testID;
-            
+
           var query2 = this.model.find({testID: newestTestID,
           testTakerID: testTakerID,
           questionBankID:questionBankID});
-          
+
           query2.exec((err, itemArray) => {
             if (!err) {
               response.json(itemArray);
@@ -135,26 +135,10 @@ class TestModel {
             };
           });
         } else {
-          console.log('error in express');  
+          console.log('error in express');
           console.log(err);
           };
-      }); 
+      });
     }
-    // Posts a record in Test collection given testID and questionID
-    // Is called when user submits and answer to a question
-    // Will contain data:
-    /*
-    testID : Number
-		questionBankCreatorID : Number
-		testTakerID : Number
-		questionBankID : Number
-		questionID : Number
-	 	orderOfQuestionInTest : Number
-		category : String
-		isCorrect : Number
-    public submitAnswer(response: any, filter: Object) {
-
-  }
-    */
 }
 export {TestModel};

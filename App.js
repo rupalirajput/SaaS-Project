@@ -89,13 +89,13 @@ var App = /** @class */ (function () {
             console.log("Query single user's reports with id:" + id);
             _this.Reports.retrieveAllReportDetails(res, { userid: id });
         });
-        // get API for getting a single report
-        router.get('/report/:userid/reports/:questionBankID', function (req, res) {
-            var id = req.params.userid;
-            var questionBankID = req.params.questionBankID;
-            console.log("Query a single report from a single user with user id:" + id + " and questionBankID id: " + questionBankID);
-            _this.Reports.retrieveSingleReportDetails(res, { userid: id, questionBankID: questionBankID });
-        });
+        /* // get API for getting a single report
+       router.get('/report/:userid/reports/:questionBankID', (req, res) => {
+           var id = req.params.userid;
+           var questionBankID = req.params.questionBankID;
+           console.log("Query a single report from a single user with user id:" + id + " and questionBankID id: " + questionBankID);
+           this.Reports.retrieveSingleReportDetails(res, {userid: id, questionBankID: questionBankID});
+       });*/
         // QUESTION BANKS
         // retrive all questionBanks
         router.get('/questionbanks/', function (req, res) {
@@ -217,15 +217,31 @@ var App = /** @class */ (function () {
             });
             res.sendStatus(200);
         });
+        /*
         // get info to be displayed in report
-        router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', function (req, res) {
+        router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
+          var testTakerID = req.params.testTakerID;
+          var questionBankID = req.params.questionBankID;
+          var testID = req.params.testID;
+          console.log('Query single test results');
+          this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
+          questionBankID: questionBankID, testID: testID});
+        });*/
+        router.get('/report/:testTakerID/reports/:questionBankID', function (req, res) {
             var testTakerID = req.params.testTakerID;
             var questionBankID = req.params.questionBankID;
-            var testID = req.params.testID;
-            console.log('Query single test results');
-            _this.Tests.getSingleReportInfo(res, { testTakerID: testTakerID,
-                questionBankID: questionBankID, testID: testID });
+            console.log('get newest test num');
+            _this.Tests.getSingleReportInfo(res, testTakerID, questionBankID);
         });
+        /*router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
+          var testTakerID = req.params.testTakerID;
+          var questionBankID = req.params.questionBankID;
+          var testID = req.params.testID;
+          console.log('get latest test results info');
+          this.Tests.getReportInfo(res, {testTakerID: testTakerID,
+          questionBankID: questionBankID, testID:testID});
+          
+        });*/
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
         this.expressApp.use('/images', express.static(path.join(__dirname, '/images')));
