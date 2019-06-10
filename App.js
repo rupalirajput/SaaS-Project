@@ -4,15 +4,19 @@ var path = require("path");
 var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
+var session = require("express-session");
 var AccountModel_1 = require("./model/AccountModel");
 var QuestionBankModel_1 = require("./model/QuestionBankModel");
 var QuestionsModel_1 = require("./model/QuestionsModel");
 var ReportModel_1 = require("./model/ReportModel");
 var TestModel_1 = require("./model/TestModel");
+var GooglePassport_1 = require("./GooglePassport");
+var passport = require('passport');
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
     function App() {
+        this.googlePassport = new GooglePassport_1.GooglePassport();
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -29,6 +33,17 @@ var App = /** @class */ (function () {
         this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+        this.expressApp.use(session({ secret: 'keyboard cat' }));
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
+    };
+    App.prototype.validateAuth = function (req, res, next) {
+        if (req.isAuthenticated()) {
+            console.log("user is authenticated");
+            return next();
+        }
+        console.log("user is not authenticated");
+        res.redirect('/');
     };
     // Configure API endpoints.
     App.prototype.routes = function () {
@@ -40,19 +55,22 @@ var App = /** @class */ (function () {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
+        router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
+        router.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/#/', failureRedirect: '/'
+        }));
         // ACCOUNTS
-        router.get('/account/', function (req, res) {
+        router.get('/account/', this.validateAuth, function (req, res) {
             console.log('Query All account');
             _this.Accounts.retrieveAllAcccounts(res);
         });
         // get API for retriving single account by userid
-        router.get('/account/:userid', function (req, res) {
+        router.get('/account/:userid', this.validateAuth, function (req, res) {
             var id = req.params.userid;
             console.log('Query single user with id: ' + id);
             _this.Accounts.retrieveAccountDetails(res, { userid: id });
         });
         // post API for creating an account
-        router.post('/account/', function (req, res) {
+        router.post('/account/', this.validateAuth, function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             jsonObj.userid = _this.idGenerator;

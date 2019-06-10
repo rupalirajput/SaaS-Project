@@ -4,6 +4,7 @@ import * as logger from 'morgan';
 import * as mongodb from 'mongodb';
 import * as url from 'url';
 import * as bodyParser from 'body-parser';
+import * as session from 'express-session';
 
 import {AccountModel} from './model/AccountModel';
 import {QuestionBankModel} from './model/QuestionBankModel';
@@ -11,6 +12,10 @@ import {QuestionsModel} from './model/QuestionsModel';
 import {DataAccess} from './DataAccess';
 import {ReportModel} from './model/ReportModel';
 import {TestModel} from './model/TestModel';
+
+import {GooglePassport} from './GooglePassport';
+
+let passport = require('passport');
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -24,9 +29,12 @@ class App {
   public QuestionBanks:QuestionBankModel;
   public Questions:QuestionsModel;
   public Tests:TestModel;
+  public googlePassport:GooglePassport;
 
   //Run configuration methods on the Express instance.
-  constructor() {
+   constructor() {
+    this.googlePassport = new GooglePassport();
+
     this.expressApp = express();
     this.middleware();
     this.routes();
@@ -44,7 +52,17 @@ class App {
     this.expressApp.use(logger('dev'));
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+    this.expressApp.use(session({ secret: 'keyboard cat' }));
+    this.expressApp.use(passport.initialize());
+    this.expressApp.use(passport.session());
   }
+
+  private validateAuth(req, res, next):void {
+    if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
+    console.log("user is not authenticated");
+    res.redirect('/');
+  }
+
 
   // Configure API endpoints.
   private routes(): void {
@@ -57,23 +75,36 @@ class App {
         next();
     });
 
+    router.get('/auth/google', 
+        passport.authenticate('google', 
+            { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }
+        )
+    );
+
+    router.get('/auth/google/callback', 
+        passport.authenticate('google', 
+            { successRedirect: '/#/', failureRedirect: '/'
+            }
+        )
+    );
+
 
     // ACCOUNTS
 
-    router.get('/account/', (req, res) => {
+    router.get('/account/',this.validateAuth, (req, res) => {
         console.log('Query All account');
         this.Accounts.retrieveAllAcccounts(res);
     });
 
       // get API for retriving single account by userid
-    router.get('/account/:userid', (req, res) => {
+    router.get('/account/:userid',this.validateAuth, (req, res) => {
         var id = req.params.userid;
         console.log('Query single user with id: ' + id);
         this.Accounts.retrieveAccountDetails(res, {userid: id});
     });
 
       // post API for creating an account
-    router.post('/account/', (req, res) => {
+    router.post('/account/',this.validateAuth, (req, res) => {
         console.log(req.body);
         var jsonObj = req.body;
         jsonObj.userid = this.idGenerator;
