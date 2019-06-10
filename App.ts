@@ -327,12 +327,7 @@ class App {
     });
     res.sendStatus(200);
   });
-<<<<<<< HEAD
-  */
   /*
-=======
-
->>>>>>> 4daee6294e702f62f95d4972b538b4c8284e2d89
   // get info to be displayed in report
   router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
     var testTakerID = req.params.testTakerID;

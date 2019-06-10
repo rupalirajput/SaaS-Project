@@ -129,7 +129,6 @@ class TestModel {
           query2.exec((err, itemArray) => {
             if (!err) {
               response.json(itemArray);
-<<<<<<< HEAD
             }
             else {
               console.log(err);
@@ -138,8 +137,6 @@ class TestModel {
         } else {
           console.log('error in express');  
           console.log(err);
-=======
->>>>>>> 4daee6294e702f62f95d4972b538b4c8284e2d89
           };
       }); 
     }
