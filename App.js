@@ -197,20 +197,26 @@ var App = /** @class */ (function () {
             _this.Tests.retrieveRandomQuestion(res, id);
         });
         // post API for submitting a question in a test
-        /*
-        router.post('test/:testid/:questionBankID/:questionID', (req, res) => {
-          console.log(req.body);
-          var jsonObj = req.body;
-          jsonObj.listId = this.idGenerator;
-          this.Lists.model.create([jsonObj], (err) => {
-              if (err) {
-                  console.log('object creation failed');
-              }
-          });
-          res.send(this.idGenerator.toString());
-          this.idGenerator++;
+        router.post('/test/:questionBankID', function (req, res) {
+            console.log("Post answer to question in test");
+            console.log(req.body);
+            var jsonObj = req.body;
+            _this.Tests.model.create([jsonObj], function (err) {
+                if (err) {
+                    console.log("Test record creation failed");
+                }
+            });
+            res.sendStatus(200);
         });
-        */
+        // get info to be displayed in report
+        router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', function (req, res) {
+            var testTakerID = req.params.testTakerID;
+            var questionBankID = req.params.questionBankID;
+            var testID = req.params.testID;
+            console.log('Query single test results');
+            _this.Tests.getSingleReportInfo(res, { testTakerID: testTakerID,
+                questionBankID: questionBankID, testID: testID });
+        });
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
         this.expressApp.use('/images', express.static(path.join(__dirname, '/images')));

@@ -13,7 +13,7 @@ var TestModel = /** @class */ (function () {
         this.schema = new Mongoose.Schema({
             testID: Number,
             questionBankCreatorID: Number,
-            testTakeerID: Number,
+            testTakerID: Number,
             questionBankID: Number,
             questionID: Number,
             orderOfQuestionInTest: Number,
@@ -71,6 +71,21 @@ var TestModel = /** @class */ (function () {
                 response.json(itemArray[randomQuestionNumber]);
             }
             else {
+                console.log(err);
+            }
+            ;
+        });
+    };
+    // Gets test results to be used in reports
+    TestModel.prototype.getSingleReportInfo = function (response, filter) {
+        var query = this.model.find(filter);
+        query.exec(function (err, itemArray) {
+            if (!err) {
+                response.json(itemArray);
+                console.log('single report working');
+            }
+            else {
+                console.log('error in express');
                 console.log(err);
             }
             ;

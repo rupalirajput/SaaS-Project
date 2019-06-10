@@ -75,14 +75,14 @@ class App {
         next();
     });
 
-    router.get('/auth/google', 
-        passport.authenticate('google', 
+    router.get('/auth/google',
+        passport.authenticate('google',
             { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }
         )
     );
 
-    router.get('/auth/google/callback', 
-        passport.authenticate('google', 
+    router.get('/auth/google/callback',
+        passport.authenticate('google',
             { successRedirect: '/#/', failureRedirect: '/'
             }
         )
@@ -299,27 +299,35 @@ class App {
   });
 
   // get API for retriving first question for a test
-  router.get('/test/:questionBankID', (req, res) => {
+  router.get('/test/:questionBankID/:orderOfQuestionInTest', (req, res) => {
       var id = req.params.questionBankID;
+      var order = req.params.orderOfQuestionInTest;
       console.log('Query single question with question bank id: ' + id);
-      this.Tests.retrieveRandomQuestion(res, id);
+      this.Tests.retrieveRandomQuestion(res, id, order);
+  });
+
+  // get API for retriving 2nd -> end questions on a test
+  router.get('/test/:questionBankID/:orderOfQuestionInTest/:testID', (req, res) => {
+      var id = req.params.questionBankID;
+      var order = req.params.orderOfQuestionInTest;
+      var testID = req.params.testID;
+      console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
+      this.Tests.retrieveRandomQuestion(res, id, order, testID);
   });
 
   // post API for submitting a question in a test
-  /*
-  router.post('test/:testid/:questionBankID/:questionID', (req, res) => {
+  router.post('/test/:questionBankID', (req, res) => {
+    console.log("Post answer to question in test");
     console.log(req.body);
     var jsonObj = req.body;
-    jsonObj.listId = this.idGenerator;
-    this.Lists.model.create([jsonObj], (err) => {
-        if (err) {
-            console.log('object creation failed');
-        }
+    this.Tests.model.create([jsonObj], (err) => {
+      if (err) {
+        console.log("Test record creation failed");
+      }
     });
-    res.send(this.idGenerator.toString());
-    this.idGenerator++;
+    res.sendStatus(200);
   });
-  */
+
   // get info to be displayed in report
   router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
     var testTakerID = req.params.testTakerID;

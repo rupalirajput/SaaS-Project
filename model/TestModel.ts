@@ -70,10 +70,9 @@ class TestModel {
       });
     }
 
-    // Gets all test records with one TestID
+    // Gets random question as the first question on a test
     public retrieveRandomQuestion(response:any, id: any) {
       var query = this.questionModel.find({questionBankID: Number(id)}).sort({questionID: 'desc'});
-      console.log(typeof(id))
       query.exec( (err, itemArray) => {
           if (!err) {
             let randomQuestionNumber = Math.floor((Math.random() * itemArray.length));
@@ -85,6 +84,11 @@ class TestModel {
       });
     }
 
+    // Gets question questions 2 -> end of test
+    public retrieveNextQuestion(response: any, id: any, testID: any){
+      
+    }
+
     // Gets test results to be used in reports
     public getSingleReportInfo(response:any, filter:Object) {
       var query = this.model.find(filter);
@@ -93,7 +97,7 @@ class TestModel {
               response.json(itemArray);
               console.log('single report working')
           } else {
-            console.log('error in express');  
+            console.log('error in express');
             console.log(err);
           };
       });
@@ -111,7 +115,9 @@ class TestModel {
 	 	orderOfQuestionInTest : Number
 		category : String
 		isCorrect : Number
+    public submitAnswer(response: any, filter: Object) {
+
+  }
     */
-    //public submitAnswer(res)
 }
 export {TestModel};
