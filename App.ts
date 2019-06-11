@@ -210,12 +210,17 @@ class App {
     var jsonObj = req.body;
     var id = req.params.questionBankID;
     jsonObj.questionBankID = id;
-    this.QuestionBanks.model.update([jsonObj],{questionid: id}, (err) => {
+    this.QuestionBanks.model.findOneAndUpdate({questionBankID: id},req.body,{new: true}, (err) => {
         if (err) {
             console.log('object creation failed');
+            console.log(err);
+        }
+        else
+        {
+          res.sendStatus(200);
         }
     });
-    res.send(this.idGenerator.toString());
+     
 });
 
 
