@@ -26,6 +26,7 @@ class App {
   public Reports:ReportModel;
   public idGenerator:number;
   public questionIdGenerator:number;
+  public useridGenerator:number;
   public QuestionBanks:QuestionBankModel;
   public Questions:QuestionsModel;
   public Tests:TestModel;
@@ -39,6 +40,7 @@ class App {
     this.middleware();
     this.routes();
     this.idGenerator = 200;
+    this.useridGenerator = 1;
     this.questionIdGenerator = 1001;
     this.Accounts = new AccountModel();
     this.Reports = new ReportModel();
@@ -80,6 +82,7 @@ class App {
         passport.authenticate('google',
             { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }
         )
+
     );
 
     router.get('/auth/google/callback',
@@ -104,24 +107,24 @@ class App {
     });
 
       // get API for retriving single account by userid
-    router.get('/account/:userid',this.validateAuth, (req, res) => {
-        var id = req.params.userid;
-        console.log('Query single user with id: ' + id);
-        this.Accounts.retrieveAccountDetails(res, {userid: id});
+    router.get('/account/:email',this.validateAuth, (req, res) => {
+        var email = req.params.email;
+        console.log('Query single user with email: ' + email);
+        this.Accounts.retrieveAccountDetails(res, {email: email});
     });
 
       // post API for creating an account
     router.post('/account/',this.validateAuth, (req, res) => {
         console.log(req.body);
         var jsonObj = req.body;
-        jsonObj.userid = this.idGenerator;
+        jsonObj.userid = this.useridGenerator;
         this.Accounts.model.create([jsonObj], (err) => {
             if (err) {
                 console.log('account creation failed');
             }
         });
-        res.send(this.idGenerator.toString());
-        this.idGenerator++;
+        res.send(this.useridGenerator.toString());
+        this.useridGenerator++;
       });
 
 

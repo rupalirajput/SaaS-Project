@@ -21,6 +21,7 @@ var App = /** @class */ (function () {
         this.middleware();
         this.routes();
         this.idGenerator = 200;
+        this.useridGenerator = 1;
         this.questionIdGenerator = 1001;
         this.Accounts = new AccountModel_1.AccountModel();
         this.Reports = new ReportModel_1.ReportModel();
@@ -76,14 +77,14 @@ var App = /** @class */ (function () {
         router.post('/account/', this.validateAuth, function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.userid = _this.idGenerator;
+            jsonObj.userid = _this.useridGenerator;
             _this.Accounts.model.create([jsonObj], function (err) {
                 if (err) {
                     console.log('account creation failed');
                 }
             });
-            res.send(_this.idGenerator.toString());
-            _this.idGenerator++;
+            res.send(_this.useridGenerator.toString());
+            _this.useridGenerator++;
         });
         // REPORTS
         // get API for getting all reports

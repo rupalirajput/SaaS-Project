@@ -24,7 +24,18 @@ var AccountModel = /** @class */ (function () {
         }, { collection: 'accounts' });
     };
     AccountModel.prototype.createModel = function () {
+        mongooseConnection.models = {};
         this.model = mongooseConnection.model("Accounts", this.schema);
+    };
+    // model = mongooseConnection.model('Accounts', this.schema);
+    AccountModel.prototype.saveUser = function (data) {
+        var myData = new this.model(data);
+        myData.save()
+            .then(function (item) {
+            console.log("item saved to database");
+        })["catch"](function (err) {
+            console.log("unable to save to database");
+        });
     };
     // Gets account given filter parameters
     AccountModel.prototype.retrieveAccountDetails = function (response, filter) {
