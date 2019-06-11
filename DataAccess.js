@@ -1,10 +1,16 @@
 "use strict";
 exports.__esModule = true;
 var Mongoose = require("mongoose");
+Mongoose.set('useFindAndModify', false);
 var DataAccess = /** @class */ (function () {
     function DataAccess() {
+        this.mongoUrl = 'mongodb+srv://dbAdmin:test@cluster0-tofxk.azure.mongodb.net/QuizAppSample?retryWrites=true&w=majority';
         DataAccess.connect();
     }
+    DataAccess.prototype.mongoSetup = function () {
+        Mongoose.Promise = global.Promise;
+        Mongoose.connect(this.mongoUrl);
+    };
     DataAccess.connect = function () {
         if (this.mongooseInstance)
             return this.mongooseInstance;

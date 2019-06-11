@@ -137,12 +137,15 @@ var App = /** @class */ (function () {
             var jsonObj = req.body;
             var id = req.params.questionBankID;
             jsonObj.questionBankID = id;
-            _this.QuestionBanks.model.update([jsonObj], { questionid: id }, function (err) {
+            _this.QuestionBanks.model.findOneAndUpdate({ questionBankID: id }, req.body, { "new": true }, function (err) {
                 if (err) {
                     console.log('object creation failed');
+                    console.log(err);
+                }
+                else {
+                    res.sendStatus(200);
                 }
             });
-            res.send(_this.idGenerator.toString());
         });
         // QUESTIONS
         // get all questions
