@@ -75,32 +75,112 @@ var TestModel = /** @class */ (function () {
         });
     };
     // Gets question questions 2 -> end of test
-    TestModel.prototype.retrieveNextQuestion = function (response, id, order, testid) {
+    TestModel.prototype.retrieveNextQuestion = function (response, id, testid) {
         var _this = this;
-        var queryAnsweredQuestions = this.model.find({ testID: testid }).select('questionID');
-        queryAnsweredQuestions.exec(function (err, resultArray) {
+        // Get test history
+        var queryTestHistory = this.model.find({ testID: testid }).select('questionID isCorrect orderOfQuestionInTest').sort({ orderOfQuestionInTest: "desc" });
+        queryTestHistory.exec(function (err, testHistory) {
             if (!err) {
-                var answeredQuestions = new Array();
+                console.log("retrieveCurrentTestHistory: No Error");
+                console.log("question array: ", testHistory);
+                // Generate array of only question IDs
                 var i;
-                for (i = 0; i < resultArray.length; i++) {
-                    answeredQuestions.push(resultArray[i]['questionID']);
+                var testHistoryQuestionIDArray = new Array();
+                for (i = 0; i < testHistory.length; i++) {
+                    testHistoryQuestionIDArray.push(testHistory[i]['questionID']);
                 }
-                var queryAllQuestions = _this.questionModel.findOne({ questionBankID: id, questionID: { "$nin": answeredQuestions } });
-                queryAllQuestions.exec(function (err, question) {
-                    if (!err) {
-                        console.log("Next question: ", question);
-                        response.json(question);
+                console.log("Cannot be any one of these ids: ", testHistoryQuestionIDArray);
+                // If last answered question was incorrect
+                if (testHistory[0]['isCorrect'] == 0) {
+                    // Find last correct answer
+                    var mustGenerateRandomQuestion = true;
+                    for (i = 0; i < testHistory.length; i++) {
+                        // If answered correctly, search all questions for new question in
+                        // that category
+                        if (testHistory[i]['isCorrect'] == 1) {
+                            var cat = testHistory[i]['category'];
+                            var queryNewQuestionInSpecificCategory = _this.questionModel.findOne({ questionBankID: id, questionID: { "$nin": testHistoryQuestionIDArray }, category: cat });
+                            queryNewQuestionInSpecificCategory.exec(function (err, result) {
+                                if (!err) {
+                                    //If no error and valid question, send response
+                                    //Otherwise, continue for loop
+                                    if (result != null) {
+                                        console.log("Next question is: ", result);
+                                        response.json(result);
+                                        mustGenerateRandomQuestion = false;
+                                    }
+                                }
+                                else {
+                                    console.log(err);
+                                }
+                            });
+                            if (!mustGenerateRandomQuestion) {
+                                break;
+                            }
+                        }
                     }
-                    else {
-                        console.log(err);
-                    }
-                });
+                }
+                // If last answered question was correct
+                if (testHistory[0]['isCorrect'] == 1) {
+                    var queryNewQuestionNotInCategory = _this.questionModel.findOne({ questionBankID: id, category: { "$nin": cat }, questionID: { "$nin": testHistoryQuestionIDArray } });
+                    queryNewQuestionNotInCategory.exec(function (err, result) {
+                        if (!err) {
+                            // If there are more questions in that category send response
+                            // Otherwise prepare to generate random question
+                            if (result != null) {
+                                console.log("Answered correct. Next question is: ", result);
+                                response.json(result);
+                                mustGenerateRandomQuestion = false;
+                            }
+                            else {
+                                console.log(err);
+                            }
+                        }
+                    });
+                }
+                if (mustGenerateRandomQuestion) {
+                    var queryRandomQuestion = _this.questionModel.findOne({ questionBankID: id, questionID: { "$nin": testHistoryQuestionIDArray } });
+                    queryRandomQuestion.exec(function (err, result) {
+                        if (!err) {
+                            console.log("Generated random question: ", result);
+                            response.json(result);
+                        }
+                        else {
+                            console.log(err);
+                        }
+                    });
+                }
             }
             else {
                 console.log(err);
             }
         });
     };
+    /*
+        // Gets question questions 2 -> end of test
+        public retrieveNextQuestion(response: any, id: any, order: any, testid: any){
+          var queryAnsweredQuestions = this.model.find({testID: testid}).select('questionID');
+          queryAnsweredQuestions.exec( (err, resultArray) => {
+            if (!err){
+              var answeredQuestions: Number[] = new Array();
+              var i:any;
+              for (i=0; i < resultArray.length; i++){
+                answeredQuestions.push(resultArray[i]['questionID']);
+              }
+              var queryAllQuestions = this.questionModel.findOne({questionBankID: id, questionID: {"$nin": answeredQuestions}});
+              queryAllQuestions.exec( (err, question) => {
+                if (!err){
+                  console.log("Next question: ", question);
+                  response.json(question);
+                } else{
+                  console.log(err);
+                }
+              });
+            } else{
+              console.log(err);
+            }
+          });
+        }*/
     // Gets test results to be used in reports
     TestModel.prototype.getSingleReportInfo = function (response, testTakerID, questionBankID) {
         var _this = this;

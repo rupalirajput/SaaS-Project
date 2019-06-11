@@ -202,13 +202,22 @@ var App = /** @class */ (function () {
             _this.Tests.retrieveRandomQuestion(res, id);
         });
         // get API for retriving 2nd -> end questions on a test
-        router.get('/test/:questionBankID/:orderOfQuestionInTest/:testID', function (req, res) {
-            var id = req.params.questionBankID;
-            var order = req.params.orderOfQuestionInTest;
+        router.get('/test/:questionBankID/:testID', function (req, res) {
+            var questionBankID = req.params.questionBankID;
+            var orderOfQuestionInTest = req.params.orderOfQuestionInTest;
             var testID = req.params.testID;
-            console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
-            _this.Tests.retrieveNextQuestion(res, id, order, testID);
+            console.log('Query single question with question bank id ' + questionBankID + ' and testID ' + testID);
+            _this.Tests.retrieveNextQuestion(res, questionBankID, testID);
         });
+        /*
+          // get API for retriving 2nd -> end questions on a test
+          router.get('/test/:questionBankID/:orderOfQuestionInTest/:testID', (req, res) => {
+              var id = req.params.questionBankID;
+              var order = req.params.orderOfQuestionInTest;
+              var testID = req.params.testID;
+              console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
+              this.Tests.retrieveNextQuestion(res, id, order, testID);
+          });*/
         // post API for submitting a question in a test
         router.post('/test/:questionBankID', function (req, res) {
             console.log("Post answer to question in test");
@@ -244,7 +253,7 @@ var App = /** @class */ (function () {
           console.log('get latest test results info');
           this.Tests.getReportInfo(res, {testTakerID: testTakerID,
           questionBankID: questionBankID, testID:testID});
-          
+      
         });*/
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));

@@ -84,6 +84,89 @@ class TestModel {
     }
 
     // Gets question questions 2 -> end of test
+    public retrieveNextQuestion(response: any, id: any, testid: any){
+      // Get test history
+      var queryTestHistory = this.model.find({testID: testid}).select('questionID isCorrect orderOfQuestionInTest').sort({orderOfQuestionInTest: "desc"});
+      queryTestHistory.exec( (err, testHistory) => {
+        if (!err){
+          console.log("retrieveCurrentTestHistory: No Error");
+          console.log("question array: ", testHistory);
+
+          // Generate array of only question IDs
+          var i: any;
+          var testHistoryQuestionIDArray: Number[] = new Array();
+          for(i = 0; i < testHistory.length; i++){
+            testHistoryQuestionIDArray.push(testHistory[i]['questionID']);
+          }
+          console.log("Cannot be any one of these ids: ", testHistoryQuestionIDArray);
+          
+          // If last answered question was incorrect
+          if(testHistory[0]['isCorrect'] == 0){
+            // Find last correct answer
+            var mustGenerateRandomQuestion = true;
+            for(i = 0; i < testHistory.length; i++){
+              // If answered correctly, search all questions for new question in
+              // that category
+              if(testHistory[i]['isCorrect'] == 1){
+                var cat = testHistory[i]['category'];
+                var queryNewQuestionInSpecificCategory = this.questionModel.findOne({questionBankID: id, questionID: {"$nin": testHistoryQuestionIDArray}, category: cat});
+                queryNewQuestionInSpecificCategory.exec( (err, result) => {
+                  if(!err){
+                    //If no error and valid question, send response
+                    //Otherwise, continue for loop
+                    if(result != null){
+                      console.log("Next question is: ", result);
+                      response.json(result);
+                      mustGenerateRandomQuestion = false;
+                    }
+                  } else {
+                    console.log(err);
+                  }
+                });
+                if(!mustGenerateRandomQuestion){
+                  break;
+                }
+              }
+            }
+          }
+
+          // If last answered question was correct
+          if(testHistory[0]['isCorrect'] == 1){
+            var queryNewQuestionNotInCategory = this.questionModel.findOne({questionBankID: id, category: {"$nin": cat}, questionID: {"$nin": testHistoryQuestionIDArray}});
+            queryNewQuestionNotInCategory.exec( (err, result) => {
+              if(!err){
+                // If there are more questions in that category send response
+                // Otherwise prepare to generate random question
+                if(result != null){
+                  console.log("Answered correct. Next question is: ", result);
+                  response.json(result);
+                  mustGenerateRandomQuestion = false;
+                } else{
+                  console.log(err);
+                }
+              }
+            });
+          }
+
+          if(mustGenerateRandomQuestion){
+            var queryRandomQuestion = this.questionModel.findOne({questionBankID: id, questionID: {"$nin": testHistoryQuestionIDArray}});
+            queryRandomQuestion.exec( (err, result) => {
+              if(!err){
+                console.log("Generated random question: ", result);
+                response.json(result);
+              } else{
+                console.log(err);
+              }
+            });
+          }
+        } else{
+          console.log(err);
+        }
+      });
+    }
+
+/*
+    // Gets question questions 2 -> end of test
     public retrieveNextQuestion(response: any, id: any, order: any, testid: any){
       var queryAnsweredQuestions = this.model.find({testID: testid}).select('questionID');
       queryAnsweredQuestions.exec( (err, resultArray) => {
@@ -106,7 +189,7 @@ class TestModel {
           console.log(err);
         }
       });
-    }
+    }*/
 
     // Gets test results to be used in reports
     public getSingleReportInfo(response:any, testTakerID:Number,
