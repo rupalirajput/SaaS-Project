@@ -68,10 +68,10 @@ var App = /** @class */ (function () {
             _this.Accounts.retrieveAllAcccounts(res);
         });
         // get API for retriving single account by userid
-        router.get('/account/:userid', this.validateAuth, function (req, res) {
-            var id = req.params.userid;
-            console.log('Query single user with id: ' + id);
-            _this.Accounts.retrieveAccountDetails(res, { userid: id });
+        router.get('/account/:email', this.validateAuth, function (req, res) {
+            var email = req.params.email;
+            console.log('Query single user with email: ' + email);
+            _this.Accounts.retrieveAccountDetails(res, { email: email });
         });
         // post API for creating an account
         router.post('/account/', this.validateAuth, function (req, res) {

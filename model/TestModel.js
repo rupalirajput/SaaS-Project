@@ -12,7 +12,6 @@ var TestModel = /** @class */ (function () {
     TestModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
             testID: Number,
-            questionBankCreatorID: Number,
             testTakerID: Number,
             questionBankID: Number,
             questionID: Number,

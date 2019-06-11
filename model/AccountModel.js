@@ -27,7 +27,6 @@ var AccountModel = /** @class */ (function () {
         mongooseConnection.models = {};
         this.model = mongooseConnection.model("Accounts", this.schema);
     };
-    // model = mongooseConnection.model('Accounts', this.schema);
     AccountModel.prototype.saveUser = function (data) {
         var myData = new this.model(data);
         myData.save()
