@@ -70,7 +70,7 @@ var App = /** @class */ (function () {
         }), function (req, res) {
             req['session']['user'] = req['user'];
             // TODO: need to change with actual user
-            if (req['user']['name']['givenName'] == "Rupali") {
+            if (req['user']['name']['givenName'] == "Jake") {
                 res.redirect("/#/professor_dashboard/");
             }
             else {
@@ -249,7 +249,7 @@ var App = /** @class */ (function () {
             _this.Tests.retrieveTestID(res, questionBankID, testTakerID);
         });
         // get API for retriving 2nd -> end questions on a test
-        router.get('/test/:questionBankID/:testID/testTakerID', this.validateAuth, function (req, res) {
+        router.get('/test/:questionBankID/:testID/:testTakerID', this.validateAuth, function (req, res) {
             var questionBankID = req.params.questionBankID;
             var testID = req.params.testID;
             var testTakerID = req.params.testTakerID;

@@ -29,7 +29,7 @@ var GooglePassport = /** @class */ (function () {
                         var email = profile.emails[0].value;
                     // TODO: need to change with actual user
                     var role = "student";
-                    if (profile.name.givenName == "Rupali") {
+                    if (profile.name.givenName == "Jake") {
                         role = "professor";
                     }
                     var jsonObj = { "userid": profile.id, "role": role };

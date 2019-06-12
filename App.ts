@@ -104,7 +104,7 @@ class App {
                 req['session']['user'] = req['user'];
 
                 // TODO: need to change with actual user
-                if (req['user']['name']['givenName'] == "Rupali") {
+                if (req['user']['name']['givenName'] == "Jake") {
                     res.redirect("/#/professor_dashboard/");
                 }
                 else {
