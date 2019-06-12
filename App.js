@@ -28,7 +28,6 @@ var App = /** @class */ (function () {
         this.QuestionBanks = new QuestionBankModel_1.QuestionBankModel();
         this.Questions = new QuestionsModel_1.QuestionsModel();
         this.Tests = new TestModel_1.TestModel();
-        this.username = "DEfault";
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -60,16 +59,19 @@ var App = /** @class */ (function () {
         });
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
         router.get('/auth/google/callback', function (req, res, next) {
-            passport.authenticate('google', function (err, user, Obj) {
+            passport.authenticate('google', function (err, user) {
                 if (err) {
                     return next(err);
                 }
                 if (!user) {
                     return res.render('/login', { error: true });
                 }
-                Obj.username = user.displayName;
-                res.send(user);
-                return res.redirect("/#/home/" + user);
+                if (user.role == "professor") {
+                    return res.redirect("/#/professor_dashboard/" + user.id + "?" + user.displayName);
+                }
+                else {
+                    return res.redirect("/#/student_dashboard/" + user.id + "?" + user.displayName);
+                }
             })(req, res, next);
             return;
         });

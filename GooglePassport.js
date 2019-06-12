@@ -25,7 +25,6 @@ var GooglePassport = /** @class */ (function () {
                     return done(null, profile);
                 else {
                     var newUser = new AccountModel_1.AccountModel();
-                    console.log('validating google profile:' + profile.id + "== ");
                     if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
                         var email = profile.emails[0].value;
                     // TODO: need to change with actual user
