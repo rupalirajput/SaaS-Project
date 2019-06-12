@@ -332,7 +332,7 @@ class App {
                     console.log("Test record creation failed");
                 }
             });
-            res.sendStatus(200);
+            res.send(req.body);
         });
         /*
         // get info to be displayed in report
