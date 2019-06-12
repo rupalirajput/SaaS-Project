@@ -60,8 +60,8 @@ var TestModel = /** @class */ (function () {
         });
     };
     // Gets random question as the first question on a test
-    TestModel.prototype.retrieveRandomQuestion = function (response, id) {
-        var query = this.questionModel.find({ questionBankID: Number(id) }).sort({ questionID: 'desc' });
+    TestModel.prototype.retrieveRandomQuestion = function (response, questionbankid) {
+        var query = this.questionModel.find({ questionBankID: Number(questionbankid) }).sort({ questionID: 'desc' });
         query.exec(function (err, itemArray) {
             if (!err) {
                 var randomQuestionNumber = Math.floor((Math.random() * itemArray.length));
@@ -74,11 +74,29 @@ var TestModel = /** @class */ (function () {
             ;
         });
     };
+    // Returns new testID for a new test
+    TestModel.prototype.retrieveTestID = function (response, questionbankid, testtakerid) {
+        var generateTestID = this.model.find({ questionBankID: Number(questionbankid), testTakerID: Number(testtakerid) }).sort({ testID: "desc" });
+        generateTestID.exec(function (err, testHistory) {
+            if (!err) {
+                if (testHistory != (null && undefined)) {
+                    var testID = testHistory[0]['testID'] + 1;
+                    response.send(testID);
+                }
+                else {
+                    response.send(1);
+                }
+            }
+            else {
+                console.log(err);
+            }
+        });
+    };
     // Gets question questions 2 -> end of test
-    TestModel.prototype.retrieveNextQuestion = function (response, id, testid) {
+    TestModel.prototype.retrieveNextQuestion = function (response, id, testid, testtakerid) {
         var _this = this;
         // Get test history
-        var queryTestHistory = this.model.find({ testID: testid }).select('questionID isCorrect orderOfQuestionInTest').sort({ orderOfQuestionInTest: "desc" });
+        var queryTestHistory = this.model.find({ testID: testid }).select('questionID isCorrect testtakerid').sort({ orderOfQuestionInTest: "desc" });
         queryTestHistory.exec(function (err, testHistory) {
             if (!err) {
                 console.log("retrieveCurrentTestHistory: No Error");
@@ -156,31 +174,6 @@ var TestModel = /** @class */ (function () {
             }
         });
     };
-    /*
-        // Gets question questions 2 -> end of test
-        public retrieveNextQuestion(response: any, id: any, order: any, testid: any){
-          var queryAnsweredQuestions = this.model.find({testID: testid}).select('questionID');
-          queryAnsweredQuestions.exec( (err, resultArray) => {
-            if (!err){
-              var answeredQuestions: Number[] = new Array();
-              var i:any;
-              for (i=0; i < resultArray.length; i++){
-                answeredQuestions.push(resultArray[i]['questionID']);
-              }
-              var queryAllQuestions = this.questionModel.findOne({questionBankID: id, questionID: {"$nin": answeredQuestions}});
-              queryAllQuestions.exec( (err, question) => {
-                if (!err){
-                  console.log("Next question: ", question);
-                  response.json(question);
-                } else{
-                  console.log(err);
-                }
-              });
-            } else{
-              console.log(err);
-            }
-          });
-        }*/
     // Gets test results to be used in reports
     TestModel.prototype.getSingleReportInfo = function (response, testTakerID, questionBankID) {
         var _this = this;

@@ -298,31 +298,29 @@ class App {
             this.Tests.retrieveOneTest(res, {testID: id});
         });
 
-        // get API for retriving first question for a test
-        router.get('/test/:questionBankID/', this.validateAuth, (req, res) => {
-            var id = req.params.questionBankID;
-            var order = req.params.orderOfQuestionInTest;
-            console.log('Query single question with question bank id: ' + id);
-            this.Tests.retrieveRandomQuestion(res, id);
+        // get API for the first question in a test
+        router.get('/test/:questionBankID', this.validateAuth, (req, res) => {
+            var questionBankID = req.params.questionBankID;
+            console.log('Query single question with question bank id: ' + questionBankID);
+            this.Tests.retrieveRandomQuestion(res, questionBankID);
+        });
+
+        // get API for a testID for a new test
+        router.get('/test/:questionBankID/:testTakerID', this.validateAuth, (req, res) => {
+            var questionBankID = req.params.questionBankID;
+            var testTakerID = req.params.testTakerID;
+            console.log('Looking up last testID for questionBank ' + questionBankID + ' and testTaker ' + testTakerID);
+            this.Tests.retrieveTestID(res, questionBankID, testTakerID);
         });
 
         // get API for retriving 2nd -> end questions on a test
-        router.get('/test/:questionBankID/:testID', this.validateAuth, (req, res) => {
+        router.get('/test/:questionBankID/:testID/testTakerID', this.validateAuth, (req, res) => {
             var questionBankID = req.params.questionBankID;
-            var orderOfQuestionInTest = req.params.orderOfQuestionInTest;
             var testID = req.params.testID;
+            var testTakerID = req.params.testTakerID;
             console.log('Query single question with question bank id ' + questionBankID + ' and testID ' + testID);
-            this.Tests.retrieveNextQuestion(res, questionBankID, testID);
+            this.Tests.retrieveNextQuestion(res, questionBankID, testID, testTakerID);
         });
-        /*
-          // get API for retriving 2nd -> end questions on a test
-          router.get('/test/:questionBankID/:orderOfQuestionInTest/:testID', (req, res) => {
-              var id = req.params.questionBankID;
-              var order = req.params.orderOfQuestionInTest;
-              var testID = req.params.testID;
-              console.log('Query single question with question bank id ' + id + ' and testID ' + testID);
-              this.Tests.retrieveNextQuestion(res, id, order, testID);
-          });*/
 
         // post API for submitting a question in a test
         router.post('/test/:questionBankID', this.validateAuth, (req, res) => {
