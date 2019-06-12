@@ -52,8 +52,17 @@ class QuestionBankModel {
     }
 
     public deleteQuestionBank(response:any, filter:Object) {
-        this.model.remove(filter);
-        response.json(filter)
+        var query = this.model.findOneAndRemove(filter);
+        query.exec( (err, itemArray) => {
+        if (!err)
+        {
+          response.json(itemArray) ;
+        }
+        else
+        {
+          console.log(err);
+        }
+      });
     }
 
 }

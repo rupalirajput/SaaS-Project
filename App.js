@@ -217,6 +217,22 @@ var App = /** @class */ (function () {
             console.log('Delete Question with id: ' + id);
             _this.Questions.deleteQuestion(res, { questionID: id });
         });
+        // Update Question
+        router.put('/question/:questionID/', function (req, res) {
+            console.log(req.body);
+            var jsonObj = req.body;
+            var id = req.params.questionID;
+            jsonObj.questionBankID = id;
+            _this.Questions.model.findOneAndUpdate({ questionID: id }, req.body, { "new": true }, function (err) {
+                if (err) {
+                    console.log('object creation failed');
+                    console.log(err);
+                }
+                else {
+                    res.sendStatus(200);
+                }
+            });
+        });
         // TESTS
         // get API for retrieving all tests
         router.get('/tests/', this.validateAuth, function (req, res) {

@@ -39,8 +39,15 @@ var QuestionBankModel = /** @class */ (function () {
         });
     };
     QuestionBankModel.prototype.deleteQuestionBank = function (response, filter) {
-        this.model.remove(filter);
-        response.json(filter);
+        var query = this.model.findOneAndRemove(filter);
+        query.exec(function (err, itemArray) {
+            if (!err) {
+                response.json(itemArray);
+            }
+            else {
+                console.log(err);
+            }
+        });
     };
     return QuestionBankModel;
 }());
