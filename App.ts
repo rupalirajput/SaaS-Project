@@ -296,7 +296,25 @@ class App {
     this.Questions.deleteQuestion(res, {questionID: id});
   });
 
+// Update Question
 
+router.put('/question/:questionID/', (req, res) => {
+  console.log(req.body);
+  var jsonObj = req.body;
+  var id = req.params.questionID;
+  jsonObj.questionBankID = id;
+  this.Questions.model.findOneAndUpdate({questionID: id},req.body,{new: true}, (err) => {
+      if (err) {
+          console.log('object creation failed');
+          console.log(err);
+      }
+      else
+      {
+        res.sendStatus(200);
+      }
+  });
+   
+});
 
   // TESTS
 
