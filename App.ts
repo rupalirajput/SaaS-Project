@@ -334,16 +334,7 @@ class App {
             });
             res.send(req.body);
         });
-        /*
-        // get info to be displayed in report
-        router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
-          var testTakerID = req.params.testTakerID;
-          var questionBankID = req.params.questionBankID;
-          var testID = req.params.testID;
-          console.log('Query single test results');
-          this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
-          questionBankID: questionBankID, testID: testID});
-        });*/
+
         router.get('/report/:testTakerID/reports/:questionBankID', this.validateAuth, (req, res) => {
             var testTakerID = req.params.testTakerID;
             var questionBankID = req.params.questionBankID;
@@ -353,17 +344,6 @@ class App {
                 questionBankID);
 
         });
-
-        /*router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
-          var testTakerID = req.params.testTakerID;
-          var questionBankID = req.params.questionBankID;
-          var testID = req.params.testID;
-          console.log('get latest test results info');
-          this.Tests.getReportInfo(res, {testTakerID: testTakerID,
-          questionBankID: questionBankID, testID:testID});
-
-
-        });*/
 
         // Update Question
         router.put('/question/:questionID/', (req, res) => {

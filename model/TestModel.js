@@ -177,13 +177,14 @@ var TestModel = /** @class */ (function () {
     // Gets test results to be used in reports
     TestModel.prototype.getSingleReportInfo = function (response, testTakerID, questionBankID) {
         var _this = this;
-        console.log('getting single report info');
+        //find newest test num
         var query = this.model.findOne({ testTakerID: testTakerID,
             questionBankID: questionBankID }).sort('-testID');
         var newestTestID;
         query.exec(function (err, itemArray) {
             if (!err && itemArray != null) {
                 newestTestID = itemArray.testID;
+                //grab test results based on params
                 var query2 = _this.model.find({ testID: newestTestID,
                     testTakerID: testTakerID,
                     questionBankID: questionBankID });

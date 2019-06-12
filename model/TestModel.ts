@@ -186,7 +186,7 @@ class TestModel {
     // Gets test results to be used in reports
     public getSingleReportInfo(response:any, testTakerID:Number,
       questionBankID:Number ) {
-      console.log('getting single report info');
+      //find newest test num
       var query = this.model.findOne({testTakerID: testTakerID,
       questionBankID:questionBankID}).sort('-testID');
       var newestTestID;
@@ -195,7 +195,7 @@ class TestModel {
         if (!err && itemArray != null) {
 
           newestTestID = itemArray.testID;
-
+          //grab test results based on params
           var query2 = this.model.find({testID: newestTestID,
           testTakerID: testTakerID,
           questionBankID:questionBankID});

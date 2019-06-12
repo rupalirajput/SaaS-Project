@@ -268,32 +268,12 @@ var App = /** @class */ (function () {
             });
             res.send(req.body);
         });
-        /*
-        // get info to be displayed in report
-        router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
-          var testTakerID = req.params.testTakerID;
-          var questionBankID = req.params.questionBankID;
-          var testID = req.params.testID;
-          console.log('Query single test results');
-          this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
-          questionBankID: questionBankID, testID: testID});
-        });*/
         router.get('/report/:testTakerID/reports/:questionBankID', this.validateAuth, function (req, res) {
             var testTakerID = req.params.testTakerID;
             var questionBankID = req.params.questionBankID;
             console.log('get newest test num');
             _this.Tests.getSingleReportInfo(res, testTakerID, questionBankID);
         });
-        /*router.get('/report/:testTakerID/reports/:questionBankID/testID/:testID', (req, res) => {
-          var testTakerID = req.params.testTakerID;
-          var questionBankID = req.params.questionBankID;
-          var testID = req.params.testID;
-          console.log('get latest test results info');
-          this.Tests.getReportInfo(res, {testTakerID: testTakerID,
-          questionBankID: questionBankID, testID:testID});
-
-
-        });*/
         // Update Question
         router.put('/question/:questionID/', function (req, res) {
             console.log(req.body);
