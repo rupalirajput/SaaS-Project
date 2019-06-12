@@ -40,7 +40,7 @@ class GooglePassport {
 
                         // TODO: need to change with actual user
                         var role = "student";
-                        if (profile.name.givenName == "rupali") {
+                        if (profile.name.givenName == "Rupali") {
                             role = "professor";
                         }
                         var jsonObj = {"userid": profile.id, "role": role};
