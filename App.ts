@@ -370,7 +370,7 @@ class App {
           console.log(req.body);
           var jsonObj = req.body;
           var id = req.params.questionID;
-          jsonObj.questionBankID = id;
+          jsonObj.questionID = id;
           this.Questions.model.findOneAndUpdate({questionID: id},req.body,{new: true}, (err) => {
               if (err) {
                   console.log('object creation failed');
