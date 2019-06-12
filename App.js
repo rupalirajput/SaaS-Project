@@ -28,6 +28,7 @@ var App = /** @class */ (function () {
         this.QuestionBanks = new QuestionBankModel_1.QuestionBankModel();
         this.Questions = new QuestionsModel_1.QuestionsModel();
         this.Tests = new TestModel_1.TestModel();
+        this.username = "DEfault";
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -58,10 +59,20 @@ var App = /** @class */ (function () {
             next();
         });
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
-        router.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/#/', failureRedirect: '/'
-        }));
-        router.get('/auth/google/logout', passport.authenticate('google', { successRedirect: '/#/', failureRedirect: '/'
-        }));
+        router.get('/auth/google/callback', function (req, res, next) {
+            passport.authenticate('google', function (err, user, Obj) {
+                if (err) {
+                    return next(err);
+                }
+                if (!user) {
+                    return res.render('/login', { error: true });
+                }
+                Obj.username = user.displayName;
+                res.send(user);
+                return res.redirect("/#/home/" + user);
+            })(req, res, next);
+            return;
+        });
         // ACCOUNTS
         router.get('/account/', this.validateAuth, function (req, res) {
             console.log('Query All account');
@@ -102,7 +113,7 @@ var App = /** @class */ (function () {
        });*/
         // QUESTION BANKS
         // retrive all questionBanks
-        router.get('/questionbanks/', function (req, res) {
+        router.get('/questionbanks/', this.validateAuth, function (req, res) {
             console.log('Query All questionBanks');
             _this.QuestionBanks.retrieveAllQuestionBanks(res);
         });
@@ -256,7 +267,7 @@ var App = /** @class */ (function () {
           console.log('get latest test results info');
           this.Tests.getReportInfo(res, {testTakerID: testTakerID,
           questionBankID: questionBankID, testID:testID});
-      
+
         });*/
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
