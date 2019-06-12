@@ -11,27 +11,47 @@ var GooglePassport = /** @class */ (function () {
         this.clientId = googleOauth2_1["default"].id;
         this.secretId = googleOauth2_1["default"].secret;
         this.Accounts = new AccountModel_1.AccountModel();
-        this.useridGenerator = 1;
         passport.use(new GoogleStrategy({
             clientID: this.clientId,
             clientSecret: this.secretId,
             callbackURL: "/auth/google/callback",
             profileFields: ['id', 'displayName', 'emails']
         }, function (accessToken, refreshToken, profile, done) {
-            process.nextTick(function () {
-                console.log('validating google profile:' + JSON.stringify(profile));
-                _this.userId = profile.id;
-                _this.displayName = profile.displayName;
-                _this.email = profile.emails[0].value;
-                _this.firstName = profile.name.givenName;
-                _this.lastName = profile.name.familyName;
-                var jsonObj = { "userid": _this.useridGenerator, "username": _this.displayName,
-                    "password": "", "firstName": _this.firstName,
-                    "lastName": _this.lastName, "email": _this.email, "role": "professor" };
-                _this.Accounts.saveUser(jsonObj);
-                _this.useridGenerator++;
-                return done(null, profile);
+            console.log('validating google profile:' + JSON.stringify(profile));
+            _this.Accounts.model.findOne({ 'userid': profile.id }, function (err, user) {
+                if (err)
+                    return done(err);
+                if (user)
+                    return done(null, profile);
+                else {
+                    var newUser = new AccountModel_1.AccountModel();
+                    if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
+                        var email = profile.emails[0].value;
+                    // TODO: need to change with actual user
+                    var role = "student";
+                    if (profile.name.givenName == "Rupali") {
+                        role = "professor";
+                    }
+                    var jsonObj = { "userid": profile.id, "role": role };
+                    newUser.saveUser(jsonObj);
+                    return done(null, profile);
+                }
             });
+            /*  process.nextTick(() => {
+                  console.log('validating google profile:' + JSON.stringify(profile));
+                  this.userId = profile.id;
+                  this.displayName = profile.displayName;
+                  this.email = profile.emails[0].value;
+                  this.firstName = profile.name.givenName;
+                  this.lastName = profile.name.familyName;
+                  this.role = "student";
+                  if (this.firstName == "rupali") {
+                      this.role = "professor";
+                  }
+                  var jsonObj = {"userid": this.userId, "role": this.role};
+                  this.Accounts.saveUser(jsonObj);
+                  return done(null, profile);
+              });*/
         }));
         passport.serializeUser(function (user, done) {
             done(null, user);
