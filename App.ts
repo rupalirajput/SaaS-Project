@@ -14,9 +14,10 @@ import {ReportModel} from './model/ReportModel';
 import {TestModel} from './model/TestModel';
 
 import {GooglePassport} from './GooglePassport';
-import googleAppAuth from "./googleOauth2";
 
 let passport = require('passport');
+let cookieParser = require('cookie-parser');
+let cookieSession = require('cookie-session');
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -55,6 +56,11 @@ class App {
         this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({extended: false}));
+        this.expressApp.use(cookieSession({
+            name: 'session',
+            keys: ['123']
+        }));
+        this.expressApp.use(cookieParser());
         this.expressApp.use(session({secret: 'keyboard cat'}));
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
@@ -68,6 +74,7 @@ class App {
         console.log("user is not authenticated");
         res.redirect('/');
     }
+
 
     // Configure API endpoints.
     private routes(): void {
@@ -88,22 +95,40 @@ class App {
         );
 
         router.get('/auth/google/callback',
-            function(req, res, next) {
-                passport.authenticate('google', function(err, user) {
-                    if (err) { return next(err) }
-                    if (!user) {
-                        return res.render('/login', { error: true });
-                    }
-                    if(user.role == "professor"){
-                        return res.redirect("/#/professor_dashboard/" + user.id + "/"+ user.displayName);
-                    }
-                    else {
-                        return res.redirect("/#/student_dashboard/" + user.id + "/"+ user.displayName);
-                    }
-                })(req, res, next);
-                return;
-            }
-        );
+            passport.authenticate('google',
+                {
+                    failureRedirect: '/'
+                }
+            ),
+            function (req, res) {
+                req['session']['user'] = req['user'];
+                res.redirect('/#/professor_dashboard/');
+            });
+
+        router.get('/displayInfo', this.validateAuth, function (req, res) {
+            res.json(req['session']['user']);
+        });
+
+        /* router.get('/auth/google/callback',
+             function (req, res, next) {
+                 passport.authenticate('google', function (err, user) {
+                     if (err) {
+                         return next(err)
+                     }
+                     if (!user) {
+                         return res.redirect('/login');
+                     }
+                     // TODO: need to change with actual user
+                     if (user.name.givenName == "Rupali") {
+                         return res.redirect("/#/professor_dashboard/" + user.id + "/" + user.displayName);
+                     }
+                     else {
+                         return res.redirect("/#/student_dashboard/" + user.id + "/" + user.displayName);
+                     }
+                 })(req, res, next);
+                 return;
+             }
+         );*/
 
         // ACCOUNTS
         router.get('/account/', this.validateAuth, (req, res) => {
@@ -136,7 +161,7 @@ class App {
         // REPORTS
 
         // get API for getting all reports
-        router.get('/report/:userid/reports', (req, res) => {
+        router.get('/report/:userid/reports', this.validateAuth, (req, res) => {
             var id = req.params.userid;
             console.log("Query single user's reports with id:" + id);
             this.Reports.retrieveAllReportDetails(res, {userid: id});
@@ -154,19 +179,19 @@ class App {
         // QUESTION BANKS
 
         // retrive all questionBanks
-        router.get('/questionbanks/',this.validateAuth, (req, res) => {
+        router.get('/questionBanks/', this.validateAuth, (req, res) => {
             console.log('Query All questionBanks');
             this.QuestionBanks.retrieveAllQuestionBanks(res);
         });
         // retrive questionBank with ID
-        router.get('/questionBanks/:questionBankID/', (req, res) => {
+        router.get('/questionBanks/:questionBankID/', this.validateAuth, (req, res) => {
             var id = req.params.questionBankID;
             console.log('Query single list with id: ' + id);
             this.QuestionBanks.retrieveQuestionBankDetails(res, {questionBankID: id});
         });
 
         // post data in questionBank
-        router.post('/questionBanks/', (req, res) => {
+        router.post('/questionBanks/', this.validateAuth, (req, res) => {
             console.log(req.body);
             var jsonObj = req.body;
             jsonObj.questionBankID = this.idGenerator;
@@ -180,14 +205,14 @@ class App {
         });
 
         // delete question bank
-        router.delete('/questionBanks/:questionBankID/', (req, res) => {
+        router.delete('/questionBanks/:questionBankID/', this.validateAuth, (req, res) => {
             var id = req.params.questionBankID;
             console.log('Delete QuestionBank with id: ' + id);
             this.QuestionBanks.deleteQuestionBank(res, {questionBankID: id});
         });
 
         // update question bank
-        router.put('/questionBanks/:questionBankID/', (req, res) => {
+        router.put('/questionBanks/:questionBankID/', this.validateAuth, (req, res) => {
             console.log(req.body);
             var jsonObj = req.body;
             var id = req.params.questionBankID;
@@ -208,20 +233,20 @@ class App {
         // QUESTIONS
 
         // get all questions
-        router.get('/questions/', (req, res) => {
+        router.get('/questions/', this.validateAuth, (req, res) => {
             console.log('Query All questions');
             this.Questions.retrieveAllQuestions(res);
         });
 
         // get questions of a particular question bank
-        router.get('/questions/bank/:questionBankID/', (req, res) => {
+        router.get('/questions/bank/:questionBankID/', this.validateAuth, (req, res) => {
             var id = req.params.questionBankID;
             console.log('Query question bank with id: ' + id);
             this.Questions.retrieveQuestionsDetails(res, {questionBankID: id});
         });
 
         // get question by question id
-        router.get('/questions/:questionID/', (req, res) => {
+        router.get('/questions/:questionID/', this.validateAuth, (req, res) => {
             var id = req.params.questionID;
             console.log('Query single question with id: ' + id);
             this.Questions.retrieveQuestionByID(res, {questionID: id});
@@ -229,7 +254,7 @@ class App {
 
 
         // insert data into questions table
-        router.post('/questions/bank/:questionID/', (req, res) => {
+        router.post('/questions/bank/:questionID/', this.validateAuth, (req, res) => {
             console.log(req.body);
             var jsonObj = req.body;
             var id = req.params.questionBankID;
@@ -244,7 +269,7 @@ class App {
         });
 
         // delete question
-        router.delete('/questions/:questionID/', (req, res) => {
+        router.delete('/questions/:questionID/', this.validateAuth, (req, res) => {
             var id = req.params.questionID;
             console.log('Delete Question with id: ' + id);
             this.Questions.deleteQuestion(res, {questionID: id});
@@ -254,20 +279,20 @@ class App {
         // TESTS
 
         // get API for retrieving all tests
-        router.get('/tests/', (req, res) => {
+        router.get('/tests/', this.validateAuth, (req, res) => {
             console.log('Query All tests');
             this.Tests.retrieveAllTests(res);
         });
 
         // get API for retriving single account by userid
-        router.get('/tests/:testid', (req, res) => {
+        router.get('/tests/:testid', this.validateAuth, (req, res) => {
             var id = req.params.testid;
             console.log('Query single test with id: ' + id);
             this.Tests.retrieveOneTest(res, {testID: id});
         });
 
         // get API for retriving first question for a test
-        router.get('/test/:questionBankID/', (req, res) => {
+        router.get('/test/:questionBankID/', this.validateAuth, (req, res) => {
             var id = req.params.questionBankID;
             var order = req.params.orderOfQuestionInTest;
             console.log('Query single question with question bank id: ' + id);
@@ -275,7 +300,7 @@ class App {
         });
 
         // get API for retriving 2nd -> end questions on a test
-        router.get('/test/:questionBankID/:testID', (req, res) => {
+        router.get('/test/:questionBankID/:testID', this.validateAuth, (req, res) => {
             var questionBankID = req.params.questionBankID;
             var orderOfQuestionInTest = req.params.orderOfQuestionInTest;
             var testID = req.params.testID;
@@ -293,7 +318,7 @@ class App {
           });*/
 
         // post API for submitting a question in a test
-        router.post('/test/:questionBankID', (req, res) => {
+        router.post('/test/:questionBankID', this.validateAuth, (req, res) => {
             console.log("Post answer to question in test");
             console.log(req.body);
             var jsonObj = req.body;
@@ -314,7 +339,7 @@ class App {
           this.Tests.getSingleReportInfo(res, {testTakerID: testTakerID,
           questionBankID: questionBankID, testID: testID});
         });*/
-        router.get('/report/:testTakerID/reports/:questionBankID', (req, res) => {
+        router.get('/report/:testTakerID/reports/:questionBankID', this.validateAuth, (req, res) => {
             var testTakerID = req.params.testTakerID;
             var questionBankID = req.params.questionBankID;
 
@@ -350,4 +375,6 @@ class App {
 
 }
 
-export {App};
+export {
+    App
+};
