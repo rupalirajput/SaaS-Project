@@ -97,12 +97,19 @@ class App {
         router.get('/auth/google/callback',
             passport.authenticate('google',
                 {
-                    failureRedirect: '/'
+                    failureRedirect: '/login'
                 }
             ),
             function (req, res) {
                 req['session']['user'] = req['user'];
-                res.redirect('/#/professor_dashboard/');
+
+                // TODO: need to change with actual user
+                if (req['user']['name']['givenName'] == "Rupali") {
+                    res.redirect("/#/professor_dashboard/");
+                }
+                else {
+                    res.redirect("/#/student_dashboard/");
+                }
             });
 
         router.get('/displayInfo', this.validateAuth, function (req, res) {
