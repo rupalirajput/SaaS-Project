@@ -95,10 +95,10 @@ class App {
                         return res.render('/login', { error: true });
                     }
                     if(user.role == "professor"){
-                        return res.redirect("/#/professor_dashboard/" + user.id + "?"+ user.displayName);
+                        return res.redirect("/#/professor_dashboard/" + user.id + "/"+ user.displayName);
                     }
                     else {
-                        return res.redirect("/#/student_dashboard/" + user.id + "?"+ user.displayName);
+                        return res.redirect("/#/student_dashboard/" + user.id + "/"+ user.displayName);
                     }
                 })(req, res, next);
                 return;
