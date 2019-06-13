@@ -1,38 +1,11 @@
-This directory contains one express servers:
-* Server.js + App.js - Encapsulated Node/Express web server w/ Mongo Access
+Trello URL:
 
-File content:
-* Server.ts - based http server
-* App.ts - express server
-* DbClient.ts - mongo db client
-* DB population files are stored on the createDB file
+https://trello.com/b/znYcYJJ8/saas-project
 
-Make sure you install the node.js server and Mongo DB sofware from the side.  Ensure your path variable contains the execution path of the node.js and mongo binary.
+FeedBack Incorporated:
 
-To execute the server db and then the node server with the following commands:
+- In response to feedback saying that our student dashboard should be more accessible, we removed our RAG indicator and placed all test result data in our reports page and does not use color as an indicator of correct/incorrect-ness.
 
-//create the db file directory
-0. md db
+- In response to feedback saying that our concept already requires a lot of work on the professor's end, we have reduced the question format options so that they are all multiple choice, while still leveraging our adaptive model.
 
-//Starts the DB server on port 3000
-1. start.toDoSample.cmd
-
-//populate the DB server with sample data
-2. startdbClient.toDoSample.cmd
->load ('createDB/createQuizAppSampleData.js');
->load ('createDB/createAdminUser.js');
->exit
-
-//install npm packages
-3. npm install
-
-//Compile Node/Express Server.  You may need to go to all subdirectories and compile the ts files.
-4. tsc AppServre.ts
-
-//Execute Node/Express server on port 8080
-5. node AppServer.js 
-
-To test server #3, try the following URL on the browser, while the server is running:
-* http://localhost:8080/
-* http://localhost:8080/app/list
-* http://localhost:8080/app/list/1
+- In response to feedback saying that providing a large enough dataset to support our adaptive model, we are planning to add the import file option offered to the professor to create a question bank so that our software will be easier for them to use.
