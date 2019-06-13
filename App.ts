@@ -312,7 +312,7 @@ class App {
             console.log('Looking up last testID for questionBank ' + questionBankID + ' and testTaker ' + testTakerID);
             this.Tests.retrieveTestID(res, questionBankID, testTakerID);
         });
-
+//
         // get API for retriving 2nd -> end questions on a test
         router.get('/test/:questionBankID/:testID/:testTakerID', this.validateAuth, (req, res) => {
             var questionBankID = req.params.questionBankID;
