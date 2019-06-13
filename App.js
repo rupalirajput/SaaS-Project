@@ -50,6 +50,7 @@ var App = /** @class */ (function () {
             console.log("user is authenticated");
             return next();
         }
+        
         console.log("user is not authenticated");
         res.redirect('/');
     };
