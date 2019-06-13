@@ -85,20 +85,20 @@ class TestModel {
     }
 
     // Returns new testID for a new test
-    public retrieveTestID(response:any, questionbankid: any, testtakerid: any) {
-      var generateTestID = this.model.find({questionBankID: Number(questionbankid), testTakerID: Number(testtakerid)}).sort({testID: "desc"});
-      generateTestID.exec( (err, testHistory) => {
-        if(!err){
-          if(testHistory != (null && undefined)){
-            var testID = testHistory[0]['testID'] + 1;
-            response.send(testID);
-          } else{
-            response.send(1);                }
-          }else{
-            console.log(err);
-          }
-        });
-    }
+  public retrieveTestID(response:any, questionbankid: any, testtakerid: any) {
+    var generateTestID = this.model.find({questionBankID: Number(questionbankid), testTakerID: Number(testtakerid)}).sort({testID: "desc"});
+    generateTestID.exec( (err, testHistory) => {
+      if(!err){
+        if(testHistory.length > 0){
+          var testID = testHistory[0]['testID'] + 1;
+          response.json(testID);
+        } else{
+          response.json(1);                }
+        }else{
+          console.log(err);
+        }
+      });
+  }
 
 
     // Gets question questions 2 -> end of test
