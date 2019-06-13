@@ -79,12 +79,12 @@ var TestModel = /** @class */ (function () {
         var generateTestID = this.model.find({ questionBankID: Number(questionbankid), testTakerID: Number(testtakerid) }).sort({ testID: "desc" });
         generateTestID.exec(function (err, testHistory) {
             if (!err) {
-                if (testHistory != (null && undefined)) {
+                if (testHistory.length > 0) {
                     var testID = testHistory[0]['testID'] + 1;
-                    response.send(testID);
+                    response.json(testID);
                 }
                 else {
-                    response.send(1);
+                    response.json(1);
                 }
             }
             else {
